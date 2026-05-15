@@ -51,9 +51,11 @@
 
     #bh {
       position: absolute;
-      inset: 0;
+      left: 0;
+      top: -8%;
       width: 100%;
-      height: 100%;
+      height: 116%;
+      will-change: transform;
     }
 
     /* vignette to blend canvas edges */
@@ -114,9 +116,9 @@
       z-index: 10;
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      padding: 0 clamp(1.5rem, 6vw, 3.5rem);
+      padding: 0 clamp(1.5rem, 6vw, 3.5rem) clamp(3rem, 6vw, 4.5rem);
     }
 
     .hero-inner {
@@ -129,8 +131,8 @@
 
     .avatar {
       flex-shrink: 0;
-      width: clamp(100px, 13vw, 132px);
-      height: clamp(100px, 13vw, 132px);
+      width: clamp(125px, 16vw, 165px);
+      height: clamp(125px, 16vw, 165px);
       border-radius: 50%;
       border: 1.5px solid var(--accent);
       object-fit: cover;
@@ -140,8 +142,8 @@
 
     .avatar-ph {
       flex-shrink: 0;
-      width: clamp(100px, 13vw, 132px);
-      height: clamp(100px, 13vw, 132px);
+      width: clamp(125px, 16vw, 165px);
+      height: clamp(125px, 16vw, 165px);
       border-radius: 50%;
       border: 1.5px dashed var(--text-muted);
       background: var(--surface);
@@ -328,10 +330,7 @@
 <body>
 
 <header class="hero">
-  <!-- SHADERTOY EMBED TEST — para volver al WebGL propio: reemplaza este iframe por <canvas id="bh" aria-hidden="true"></canvas> -->
-  <iframe src="https://www.shadertoy.com/embed/lstSRS?gui=false&t=10&paused=false&muted=true"
-          style="position:absolute;inset:0;width:100%;height:100%;border:0;"
-          allowfullscreen aria-hidden="true"></iframe>
+  <canvas id="bh" aria-hidden="true"></canvas>
 
   <nav aria-label="Site navigation">
     <span class="monogram">DS</span>
@@ -541,7 +540,7 @@ void Haze(inout vec3 color, vec3 pos, float alpha) {
     float torusDist = length(sdTorus(pos + vec3(0.0,-0.05,0.0), t));
     float bloomDisc = 1.0 / (pow(torusDist, 2.0) + 0.001);
     vec3 col = MainColor;
-    bloomDisc *= length(pos) < 0.5 ? 0.0 : 1.0;
+    bloomDisc *= length(pos) < 1.0 ? 0.0 : 1.0;
     color += col * bloomDisc * (2.9 / float(ITERATIONS)) * (1.0 - alpha);
 }
 
@@ -664,6 +663,7 @@ void main() {
     for (int i = 0; i < ITERATIONS; i++) {
         WarpSpace(eyevec, raypos);
         raypos += eyevec * far / float(ITERATIONS);
+        if (length(raypos) < 1.0) break; // absorbed by event horizon — stays black
         GasDisc(color, alpha, raypos);
         Haze(color, raypos, alpha);
     }
@@ -1132,6 +1132,16 @@ if (reduced) {
 } else {
   requestAnimationFrame(render);
 }
+
+// ── Parallax on scroll ────────────────────────────────────────────
+const hero = canvas.closest('.hero');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const heroH   = hero ? hero.offsetHeight : window.innerHeight;
+  if (scrollY < heroH) {
+    canvas.style.transform = `translateY(${scrollY * 0.45}px)`;
+  }
+}, { passive: true });
 
 })();
 </script>
