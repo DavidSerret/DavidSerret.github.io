@@ -160,7 +160,7 @@
     }
 
     .hero-text .role { font-size: clamp(0.85rem, 1.8vw, 1rem); color: var(--text-sec); margin-bottom: 0.35rem; }
-    .hero-text .loc { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    .hero-text .loc { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-sec); letter-spacing: 0.06em; }
 
     .scroll-cue {
       position: absolute;
@@ -248,8 +248,8 @@
 
     .card-stack {
       font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-muted);
+      font-size: 0.68rem;
+      color: var(--text-sec);
       line-height: 1.4;
       white-space: nowrap;
       overflow: hidden;
@@ -290,14 +290,18 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    .card-inner {
+      display: grid;
+      grid-template-columns: 45% 1fr;
+      min-height: 180px;
+    }
+
     .card-screenshot {
-      width: 100%;
-      aspect-ratio: 16/9;
       background: var(--surface2);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
       overflow: hidden;
     }
 
@@ -313,40 +317,63 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
     }
 
-    .screenshot-ph svg { width: 28px; height: 28px; color: var(--text-muted); opacity: 0.4; }
+    .screenshot-ph svg { width: 22px; height: 22px; color: var(--text-muted); opacity: 0.35; }
 
     .screenshot-ph span {
       font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.58rem;
       color: var(--text-muted);
-      opacity: 0.5;
-      letter-spacing: 0.1em;
+      opacity: 0.4;
+      letter-spacing: 0.08em;
     }
 
     .card-desc-area {
-      padding: 1rem 1.2rem;
+      padding: 1.1rem 1.2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+
+    .card-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-top: 0.1rem;
+    }
+
+    .card-feature {
+      display: flex;
       align-items: flex-start;
-      gap: 1.5rem;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      color: var(--text-sec);
+      line-height: 1.5;
     }
 
-    .card-desc { font-size: 0.875rem; color: var(--text-sec); line-height: 1.75; flex: 1; }
-
-    .card-links-expanded { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
-
-    .card-links-expanded a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+    .card-feature .fi {
       color: var(--accent);
-      text-decoration: none;
-      white-space: nowrap;
-      transition: color 0.15s;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 0.2rem;
     }
 
-    .card-links-expanded a:hover { color: var(--accent-alt); text-decoration: underline; }
+    /* no duplicate links in expanded */
+    .card-links-expanded { display: none; }
+
+    @media (max-width: 620px) {
+      .card-inner { grid-template-columns: 1fr; }
+      .card-screenshot { border-right: none; border-bottom: 1px solid var(--border); min-height: 130px; max-height: 200px; }
+    }
 
     footer { text-align: center; padding-top: 0.5rem; }
 
@@ -469,15 +496,19 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <img src="screenshots/routr-landing.png" alt="Routr screenshot"
-                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/routr-landing.png</span></div>'">
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Flight search reimagined. Search across multiple origin and destination airports simultaneously, filter by layover duration, cabin class and stops, and browse a full price calendar to shift dates and save. Built on live flight data from the Duffel API with Redis caching.</p>
-            <div class="card-links-expanded">
-              <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
-              <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <img src="screenshots/routr-landing.png" alt="Routr"
+                   onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>routr-landing.png</span></div>'">
+            </div>
+            <div class="card-desc-area">
+              <p class="card-desc">Flight search reimagined — built on live data from the Duffel API.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Multi-airport search across origins and destinations simultaneously</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Price calendar to shift dates and find cheaper fares</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Advanced filters: stops, layover duration, cabin class, airlines</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Redis caching to reduce latency and API cost</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -499,15 +530,19 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <img src="screenshots/checklist-bot.png" alt="Checklist Bot screenshot"
-                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/checklist-bot.png</span></div>'">
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Task management web app for Discord teams. Sign in with Discord OAuth, organize work into hierarchical projects, sections and subsections, assign tasks to multiple members, and track progress in real time with sprint support. Includes a companion Python bot for in-channel task management.</p>
-            <div class="card-links-expanded">
-              <a href="https://checklist-bot-production-2df8.up.railway.app/" target="_blank" rel="noopener noreferrer">Live ↗</a>
-              <a href="https://github.com/DavidSerret/discord-bot" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <img src="screenshots/checklist-bot.png" alt="Checklist Bot"
+                   onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>checklist-bot.png</span></div>'">
+            </div>
+            <div class="card-desc-area">
+              <p class="card-desc">Task management web app for Discord server teams.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Discord OAuth sign-in via NextAuth</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Hierarchical structure: projects → sections → subsections → tasks</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Real-time progress tracking and sprint support</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Companion Python bot for in-channel task management</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -529,15 +564,18 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <img src="screenshots/strikepool.png" alt="Strikepool screenshot"
-                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/strikepool.png</span></div>'">
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Real client project for a billiard bar in Terrassa. Customers see table availability in real time via Supabase Realtime and book directly from their phone. Owners manage reservations, block time slots and view the weekly calendar from a protected admin panel. Email confirmations and reminders via Resend.</p>
-            <div class="card-links-expanded">
-              <a href="https://strikepool.vercel.app/" target="_blank" rel="noopener noreferrer">Live ↗</a>
-              <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <img src="screenshots/strikepool.png" alt="Strikepool"
+                   onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>strikepool.png</span></div>'">
+            </div>
+            <div class="card-desc-area">
+              <p class="card-desc">Real client project — table reservation system for a billiard bar in Terrassa.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Real-time availability via Supabase Realtime</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Email confirmations and 1h reminders via Resend</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Protected admin panel with weekly calendar and time blocking</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -559,15 +597,18 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <img src="screenshots/happinest.png" alt="Happinest screenshot"
-                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/happinest.png</span></div>'">
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Web platform for animal shelters. Adoption listings, volunteer coordination, foster family management, and a blog covering pet care and animal welfare. Built to help shelters connect animals with people faster.</p>
-            <div class="card-links-expanded">
-              <a href="https://happinest.fly.dev/" target="_blank" rel="noopener noreferrer">Live ↗</a>
-              <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <img src="screenshots/happinest.png" alt="Happinest"
+                   onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>happinest.png</span></div>'">
+            </div>
+            <div class="card-desc-area">
+              <p class="card-desc">Web platform for animal shelters — built to help animals find homes faster.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Adoption listings with photos, status and request flow</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Volunteer coordination and foster family management</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Blog covering pet care, adoption stories and animal welfare</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -588,16 +629,26 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshots/deskup.png</span>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <div class="screenshot-ph">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:48px;height:48px;color:var(--accent);opacity:0.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:32px;height:32px;color:var(--accent-alt);opacity:0.4;margin-top:0.5rem">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span style="margin-top:0.5rem">IoT · Embedded · AI</span>
+              </div>
             </div>
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Smart office platform for height-adjustable desks. Real-time height control, user session tracking, automated cleaning schedules, ergonomic AI analyzer via MediaPipe, and a Raspberry Pi Pico W embedded controller — all orchestrated with Docker.</p>
-            <div class="card-links-expanded">
-              <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            <div class="card-desc-area">
+              <p class="card-desc">Smart office platform for height-adjustable desks — web + embedded + AI.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Real-time desk height control and user session tracking</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>AI posture analyzer via Python + MediaPipe</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Raspberry Pi Pico W embedded controller with OLED display</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Automated cleaning schedules and 3D office layout (Three.js)</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -619,15 +670,18 @@
           </div>
         </summary>
         <div class="card-body">
-          <div class="card-screenshot">
-            <img src="screenshots/hpo-optimizer.png" alt="HPO Analyzer screenshot"
-                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/hpo-optimizer.png</span></div>'">
-          </div>
-          <div class="card-desc-area">
-            <p class="card-desc">Desktop tool built in collaboration with Danfoss to optimize industrial heat production. Processes real operational data, runs a multi-parameter algorithm across winter and summer scenarios (production cost, CO₂, fuel efficiency), and presents results in interactive charts with export support.</p>
-            <div class="card-links-expanded">
-              <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
-              <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+          <div class="card-inner">
+            <div class="card-screenshot">
+              <img src="screenshots/hpo-optimizer.png" alt="HPO Analyzer"
+                   onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>hpo-optimizer.png</span></div>'">
+            </div>
+            <div class="card-desc-area">
+              <p class="card-desc">Desktop tool built in collaboration with Danfoss to optimize industrial heat production.</p>
+              <div class="card-features">
+                <div class="card-feature"><span class="fi">✦</span><span>Multi-parameter optimization: cost, CO₂ emissions, fuel efficiency</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Winter / summer scenarios with configurable production units</span></div>
+                <div class="card-feature"><span class="fi">✦</span><span>Interactive charts with zoom, auto-scale and CSV export</span></div>
+              </div>
             </div>
           </div>
         </div>
