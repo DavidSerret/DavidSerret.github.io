@@ -13,12 +13,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Devicons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg:         #060a0d;
       --surface:    #0d1318;
+      --surface2:   #111820;
       --border:     #162030;
       --accent:     #2dd4bf;
       --accent-alt: #38bdf8;
@@ -51,20 +54,16 @@
 
     #bh {
       position: absolute;
-      left: 0;
-      top: -8%;
-      width: 100%;
-      height: 116%;
+      left: 0; top: -8%;
+      width: 100%; height: 116%;
       will-change: transform;
     }
 
-    /* vignette to blend canvas edges */
     .hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 55% at 50% 50%, transparent 30%, var(--bg) 100%);
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, transparent 30%, var(--bg) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -109,7 +108,7 @@
     .nav-links a:hover { color: var(--accent); }
     .nav-links svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-    /* ── HERO CENTER ──────────────────────────────── */
+    /* ── HERO BODY ────────────────────────────────── */
 
     .hero-body {
       position: relative;
@@ -126,8 +125,6 @@
       align-items: center;
       gap: clamp(1.5rem, 4vw, 2.75rem);
     }
-
-    /* ── AVATAR ───────────────────────────────────── */
 
     .avatar {
       flex-shrink: 0;
@@ -180,8 +177,6 @@
       letter-spacing: 0.06em;
     }
 
-    /* ── SCROLL CUE ───────────────────────────────── */
-
     .scroll-cue {
       position: absolute;
       bottom: 1.75rem;
@@ -205,11 +200,7 @@
       padding: clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,2rem) clamp(3rem,8vw,5rem);
     }
 
-    hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2.25rem 0;
-    }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.25rem 0; }
 
     .label {
       font-family: 'DM Mono', monospace;
@@ -220,15 +211,29 @@
       margin-bottom: 1.25rem;
     }
 
-    /* ── ABOUT ────────────────────────────────────── */
+    .about p { color: var(--text-sec); font-size: 0.96rem; line-height: 1.9; }
 
-    .about p {
-      color: var(--text-sec);
-      font-size: 0.96rem;
-      line-height: 1.9;
+    /* ── STACK ICONS ──────────────────────────────── */
+
+    .stack-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
     }
 
-    /* ── PROJECTS ─────────────────────────────────── */
+    .stack-icons i {
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .stack-icons i:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── PROJECT LIST ─────────────────────────────── */
 
     .project-list {
       display: flex;
@@ -236,23 +241,33 @@
       gap: 0.5rem;
     }
 
+    /* ── PROJECT CARD (accordion) ─────────────────── */
+
     .card {
       background: var(--surface);
       border-left: 2px solid var(--accent);
       border-radius: 0 6px 6px 0;
-      padding: 0.85rem 1.2rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: var(--accent-alt); }
+
+    /* Header row — always visible, clickable */
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      transition: border-color 0.2s, transform 0.18s, box-shadow 0.18s;
+      padding: 0.85rem 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
     }
 
-    .card:hover {
-      border-color: var(--accent-alt);
-      transform: translateX(3px);
-      box-shadow: -3px 0 0 0 var(--accent-alt), 6px 0 20px rgba(56,189,248,0.06);
-    }
+    .card-header::-webkit-details-marker { display: none; }
+
+    .card-header-left { flex: 1; min-width: 0; }
 
     .card-name {
       font-family: 'DM Mono', monospace;
@@ -267,15 +282,24 @@
       font-size: 0.65rem;
       color: var(--text-muted);
       line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .card-links {
+    .card-header-right {
       display: flex;
-      gap: 0.85rem;
+      align-items: center;
+      gap: 1rem;
       flex-shrink: 0;
     }
 
-    .card-links a {
+    .card-links-inline {
+      display: flex;
+      gap: 0.85rem;
+    }
+
+    .card-links-inline a {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
       color: var(--accent);
@@ -284,14 +308,115 @@
       transition: color 0.15s;
     }
 
-    .card-links a:hover { color: var(--accent-alt); text-decoration: underline; }
+    .card-links-inline a:hover { color: var(--accent-alt); text-decoration: underline; }
+
+    /* Chevron */
+    .chevron {
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    details[open] .chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    /* Expanded panel */
+    .card-body {
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+      animation: slideDown 0.25s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Screenshot placeholder */
+    .card-screenshot {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .screenshot-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .screenshot-ph svg {
+      width: 28px;
+      height: 28px;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+
+    .screenshot-ph span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+    }
+
+    .card-desc-area {
+      padding: 1rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-sec);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .card-links-expanded {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .card-links-expanded a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .card-links-expanded a:hover { color: var(--accent-alt); text-decoration: underline; }
 
     /* ── FOOTER ───────────────────────────────────── */
 
-    footer {
-      text-align: center;
-      padding-top: 0.5rem;
-    }
+    footer { text-align: center; padding-top: 0.5rem; }
 
     footer p {
       font-family: 'DM Mono', monospace;
@@ -300,30 +425,30 @@
       line-height: 2;
     }
 
-    /* ── SECTION ANIMS ────────────────────────────── */
+    /* ── ANIMS ────────────────────────────────────── */
 
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(12px); }
       to   { opacity:1; transform:translateY(0); }
     }
 
-    .about   { animation: fadeUp 0.5s ease both 0.05s; }
-    .projects{ animation: fadeUp 0.5s ease both 0.15s; }
-    footer   { animation: fadeUp 0.5s ease both 0.25s; }
+    .about    { animation: fadeUp 0.5s ease both 0.05s; }
+    .stack-section { animation: fadeUp 0.5s ease both 0.1s; }
+    .projects { animation: fadeUp 0.5s ease both 0.15s; }
+    footer    { animation: fadeUp 0.5s ease both 0.25s; }
 
     /* ── MOBILE ───────────────────────────────────── */
 
     @media (max-width: 500px) {
       .hero-inner { flex-direction: column; text-align: center; gap: 1.2rem; }
       .nav-label  { display: none; }
-      .card       { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+      .card-desc-area { flex-direction: column; }
+      .card-links-expanded { flex-direction: row; }
+      .card-stack { white-space: normal; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
@@ -371,9 +496,32 @@
 </header>
 
 <main>
+
   <section class="about">
     <p class="label">About</p>
     <p>Building software at the intersection of engineering and real-world problems. Studying Software Engineering at SDU (Denmark) and Physics at UNED (Spain) simultaneously.</p>
+  </section>
+
+  <hr>
+
+  <section class="stack-section">
+    <p class="label">Stack</p>
+    <div class="stack-icons">
+      <i class="devicon-typescript-plain" title="TypeScript"></i>
+      <i class="devicon-nextjs-plain" title="Next.js"></i>
+      <i class="devicon-react-original" title="React"></i>
+      <i class="devicon-nodejs-plain" title="Node.js"></i>
+      <i class="devicon-csharp-plain" title="C#"></i>
+      <i class="devicon-dotnetcore-plain" title=".NET"></i>
+      <i class="devicon-laravel-plain" title="Laravel"></i>
+      <i class="devicon-php-plain" title="PHP"></i>
+      <i class="devicon-tailwindcss-plain" title="Tailwind CSS"></i>
+      <i class="devicon-postgresql-plain" title="PostgreSQL"></i>
+      <i class="devicon-mongodb-plain" title="MongoDB"></i>
+      <i class="devicon-redis-plain" title="Redis"></i>
+      <i class="devicon-docker-plain" title="Docker"></i>
+      <i class="devicon-git-plain" title="Git"></i>
+    </div>
   </section>
 
   <hr>
@@ -382,67 +530,190 @@
     <p class="label">Projects</p>
     <div class="project-list">
 
-      <article class="card">
-        <div>
-          <p class="card-name">Routr</p>
-          <p class="card-stack">Next.js · TypeScript · Duffel API · Upstash Redis · Vercel</p>
+      <!-- Routr -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">Routr</p>
+            <p class="card-stack">Next.js · TypeScript · Duffel API · Upstash Redis · Vercel</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Live ↗</a>
+              <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <!-- Replace with: <img src="screenshots/routr.png" alt="Routr screenshot"> -->
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · routr.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">Flight search reimagined. Multi-airport group selection, open-jaw route optimization, and a real-time price calendar — built on live flight data from the Duffel API with Redis caching.</p>
+            <div class="card-links-expanded">
+              <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
+              <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
-          <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
-      <article class="card">
-        <div>
-          <p class="card-name">DialysisX</p>
-          <p class="card-stack">TypeScript · Node.js · React · WebSocket</p>
+      <!-- DialysisX -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">DialysisX</p>
+            <p class="card-stack">TypeScript · Node.js · React · WebSocket</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · dialysisx.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">Gamified cycling simulation for dialysis ward patients. Pedal devices stream real-time data to a ward-wide race format, turning treatment sessions into a shared experience.</p>
+            <div class="card-links-expanded">
+              <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
-      <article class="card">
-        <div>
-          <p class="card-name">Strikepool</p>
-          <p class="card-stack">TypeScript · Next.js · Supabase · Tailwind</p>
+      <!-- Strikepool -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">Strikepool</p>
+            <p class="card-stack">TypeScript · Next.js · Supabase · Tailwind</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · strikepool.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">Table reservation system for a billiard bar. WhatsApp confirmation flow, real-time availability, and an admin dashboard for managing bookings and walk-ins.</p>
+            <div class="card-links-expanded">
+              <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
-      <article class="card">
-        <div>
-          <p class="card-name">Happinest</p>
-          <p class="card-stack">Laravel · PHP · MySQL · Blade</p>
+      <!-- Happinest -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">Happinest</p>
+            <p class="card-stack">Laravel · PHP · MySQL · Blade</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · happinest.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">Web platform for an animal shelter. Adoption listings, volunteer coordination, and a foster family management system — built to help animals find homes faster.</p>
+            <div class="card-links-expanded">
+              <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
-      <article class="card">
-        <div>
-          <p class="card-name">DeskUp</p>
-          <p class="card-stack">Laravel · PHP · MQTT · Tailwind</p>
+      <!-- DeskUp -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">DeskUp</p>
+            <p class="card-stack">Laravel · PHP · MQTT · Tailwind</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · deskup.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">IoT monitoring app for height-adjustable desks. Tracks usage patterns, sitting and standing time, and sends nudge notifications to encourage healthier work habits.</p>
+            <div class="card-links-expanded">
+              <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
-      <article class="card">
-        <div>
-          <p class="card-name">HPO Analyzer</p>
-          <p class="card-stack">C# · Avalonia · .NET</p>
+      <!-- HPO Analyzer -->
+      <details class="card">
+        <summary class="card-header">
+          <div class="card-header-left">
+            <p class="card-name">HPO Analyzer</p>
+            <p class="card-stack">C# · Avalonia · .NET</p>
+          </div>
+          <div class="card-header-right">
+            <div class="card-links-inline">
+              <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Download ↓</a>
+              <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </summary>
+        <div class="card-body">
+          <div class="card-screenshot">
+            <div class="screenshot-ph">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>screenshot · hpo.png</span>
+            </div>
+          </div>
+          <div class="card-desc-area">
+            <p class="card-desc">Desktop tool for heat production optimization analysis. Processes industrial sensor data to identify efficiency patterns and flag anomalies in heating system output.</p>
+            <div class="card-links-expanded">
+              <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
+              <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+            </div>
+          </div>
         </div>
-        <div class="card-links">
-          <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
-          <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-        </div>
-      </article>
+      </details>
 
     </div>
   </section>
@@ -455,28 +726,26 @@
   </footer>
 </main>
 
+<!-- Black hole WebGL (preserved from your commit) -->
 <script>
 (function () {
 'use strict';
 
 const canvas  = document.getElementById('bh');
-if (!canvas) return; // iframe mode active — WebGL code preserved but dormant
+if (!canvas) return;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
 if (!gl) { console.warn('WebGL 2 not available'); return; }
 
-// Required for RGBA16F render targets
 if (!gl.getExtension('EXT_color_buffer_float')) {
   console.warn('EXT_color_buffer_float not supported'); return;
 }
 
-// ── Shared vertex shader (full-screen triangle pair) ─────────────
 const VS = `#version 300 es
 in vec2 a_pos;
 void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
 
-// ── Common Shadertoy uniforms block ───────────────────────────────
 const UNI = `
 uniform vec3  iResolution;
 uniform float iTime;
@@ -488,9 +757,6 @@ uniform sampler2D iChannel2;
 uniform sampler2D iChannel3;
 `;
 
-// ─────────────────────────────────────────────────────────────────
-// BUFFER A  — main black-hole ray march + temporal AA
-// ─────────────────────────────────────────────────────────────────
 const FS_A = `#version 300 es
 precision highp float;
 out vec4 fragColor;
@@ -509,8 +775,7 @@ float rand(vec2 coord) {
 }
 
 float noise(in vec3 x) {
-    vec3 p = floor(x);
-    vec3 f = fract(x);
+    vec3 p = floor(x); vec3 f = fract(x);
     f = f*f*(3.0-2.0*f);
     vec2 uv = (p.xy + vec2(37.0,17.0)*p.z) + f.xy;
     vec2 rg = textureLod(iChannel0, (uv + 0.5)/256.0, 0.0).yx;
@@ -545,12 +810,11 @@ void Haze(inout vec3 color, vec3 pos, float alpha) {
 }
 
 void GasDisc(inout vec3 color, inout float alpha, vec3 pos) {
-    float discRadius = 3.2;
-    float discWidth  = 5.3;
-    float discInner  = discRadius - discWidth * 0.5;
-    float discOuter  = discRadius + discWidth * 0.5;
-    vec3  origin     = vec3(0.0);
-    vec3  discNormal = vec3(0.0, 1.0, 0.0);
+    float discRadius = 3.2, discWidth = 5.3;
+    float discInner = discRadius - discWidth * 0.5;
+    float discOuter = discRadius + discWidth * 0.5;
+    vec3 origin = vec3(0.0);
+    vec3 discNormal = vec3(0.0, 1.0, 0.0);
     float discThickness = 0.1;
 
     float distFromCenter = distance(pos, origin);
@@ -558,27 +822,22 @@ void GasDisc(inout vec3 color, inout float alpha, vec3 pos) {
 
     float radialGradient = 1.0 - saturate((distFromCenter - discInner) / discWidth * 0.5);
     float coverage = pcurve(radialGradient, 4.0, 0.9);
-
     discThickness *= radialGradient;
     coverage *= saturate(1.0 - abs(distFromDisc) / discThickness);
 
-    vec3  dustColorLit  = MainColor;
+    vec3 dustColorLit = MainColor;
     float dustGlow = 1.0 / (pow(1.0 - radialGradient, 2.0) * 290.0 + 0.002);
-    vec3  dustColor = dustColorLit * dustGlow * 8.2;
-
+    vec3 dustColor = dustColorLit * dustGlow * 8.2;
     coverage = saturate(coverage * 0.7);
 
     float fade = pow((abs(distFromCenter - discInner) + 0.4), 4.0) * 0.04;
     float bloomFactor = 1.0 / (pow(distFromDisc, 2.0) * 40.0 + fade + 0.00002);
-    vec3  b = dustColorLit * pow(bloomFactor, 1.5);
-
-    // outer → golden amber / inner → overexposed warm white (Interstellar palette)
+    vec3 b = dustColorLit * pow(bloomFactor, 1.5);
     b *= mix(vec3(1.0, 0.75, 0.38), vec3(1.85, 1.55, 1.0), vec3(pow(radialGradient, 2.0)));
     b *= mix(vec3(1.45, 0.82, 0.28), vec3(1.0, 0.97, 0.88), vec3(pow(radialGradient, 0.5)));
 
     dustColor = mix(dustColor, b * 150.0, saturate(1.0 - coverage));
     coverage  = saturate(coverage + bloomFactor * bloomFactor * 0.1);
-
     if (coverage < 0.01) return;
 
     vec3 radialCoords;
@@ -590,26 +849,25 @@ void GasDisc(inout vec3 color, inout float alpha, vec3 pos) {
     float speed = 0.06;
     float noise1 = 1.0;
     vec3 rc = radialCoords;
-    rc.y += iTime * speed; noise1 *= noise(rc*3.0)*0.5+0.5;
-    rc.y -= iTime * speed; noise1 *= noise(rc*6.0)*0.5+0.5;
-    rc.y += iTime * speed; noise1 *= noise(rc*12.0)*0.5+0.5;
-    rc.y -= iTime * speed; noise1 *= noise(rc*24.0)*0.5+0.5;
+    rc.y += iTime*speed; noise1 *= noise(rc*3.0)*0.5+0.5;
+    rc.y -= iTime*speed; noise1 *= noise(rc*6.0)*0.5+0.5;
+    rc.y += iTime*speed; noise1 *= noise(rc*12.0)*0.5+0.5;
+    rc.y -= iTime*speed; noise1 *= noise(rc*24.0)*0.5+0.5;
 
     float noise2 = 2.0;
     rc = radialCoords + 30.0;
-    rc.y += iTime * speed; noise2 *= noise(rc*3.0)*0.5+0.5;
-    rc.y -= iTime * speed; noise2 *= noise(rc*6.0)*0.5+0.5;
-    rc.y += iTime * speed; noise2 *= noise(rc*12.0)*0.5+0.5;
-    rc.y -= iTime * speed; noise2 *= noise(rc*24.0)*0.5+0.5;
-    rc.y += iTime * speed; noise2 *= noise(rc*48.0)*0.5+0.5;
-    rc.y -= iTime * speed; noise2 *= noise(rc*92.0)*0.5+0.5;
+    rc.y += iTime*speed; noise2 *= noise(rc*3.0)*0.5+0.5;
+    rc.y -= iTime*speed; noise2 *= noise(rc*6.0)*0.5+0.5;
+    rc.y += iTime*speed; noise2 *= noise(rc*12.0)*0.5+0.5;
+    rc.y -= iTime*speed; noise2 *= noise(rc*24.0)*0.5+0.5;
+    rc.y += iTime*speed; noise2 *= noise(rc*48.0)*0.5+0.5;
+    rc.y -= iTime*speed; noise2 *= noise(rc*92.0)*0.5+0.5;
 
     dustColor *= noise1 * 0.998 + 0.002;
     coverage  *= noise2;
 
     radialCoords.y += iTime * speed * 0.5;
     dustColor *= pow(texture(iChannel1, radialCoords.yx * vec2(0.15, 0.27)).rgb, vec3(2.0)) * 4.0;
-
     coverage = saturate(coverage);
 
     color += dustColor * coverage * (1.0 - alpha);
@@ -619,7 +877,7 @@ void GasDisc(inout vec3 color, inout float alpha, vec3 pos) {
 void WarpSpace(inout vec3 eyevec, inout vec3 raypos) {
     float singularityDist = length(raypos);
     float warpFactor = 1.0 / (pow(singularityDist, 2.0) + 0.000001);
-    vec3  singularityVector = normalize(-raypos);
+    vec3 singularityVector = normalize(-raypos);
     eyevec = normalize(eyevec + singularityVector * warpFactor * 5.0 / float(ITERATIONS));
 }
 
@@ -635,24 +893,19 @@ void main() {
     vec2 uv = gl_FragCoord.xy / iResolution.xy;
     float aspect = iResolution.x / iResolution.y;
     vec2 uveye = uv;
-
 #ifdef TEMPORAL_AA
     uveye.x += (rand(uv + sin(iTime)) / iResolution.x) * (iMouse.z > 1.0 ? 0.0 : 1.0);
     uveye.y += (rand(uv + 1.0 + sin(iTime)) / iResolution.y) * (iMouse.z > 1.0 ? 0.0 : 1.0);
 #endif
-
     vec3 eyevec = normalize(vec3((uveye * 2.0 - 1.0) * vec2(aspect, 1.0), 6.0));
     vec3 eyepos = vec3(0.0, 0.0, -10.0);
-
     vec2 mousepos = iMouse.xy / iResolution.xy;
     if (mousepos.x == 0.0) mousepos.x = 0.35;
     eyepos.x += mousepos.x * 3.0 - 1.5;
-
     const float far = 15.0;
     RotateCamera(eyevec, eyepos);
 
-    vec3  color = vec3(0.0);
-    float alpha = 0.0;
+    vec3 color = vec3(0.0); float alpha = 0.0;
     float dither = rand(uv
 #ifdef TEMPORAL_AA
         + sin(iTime) * (iMouse.z > 1.0 ? 0.0 : 1.0)
@@ -663,13 +916,11 @@ void main() {
     for (int i = 0; i < ITERATIONS; i++) {
         WarpSpace(eyevec, raypos);
         raypos += eyevec * far / float(ITERATIONS);
-        if (length(raypos) < 1.0) break; // absorbed by event horizon — stays black
+        if (length(raypos) < 1.0) break;
         GasDisc(color, alpha, raypos);
         Haze(color, raypos, alpha);
     }
-
     color *= 0.0001;
-
 #ifdef TEMPORAL_AA
     const float p = 1.0;
     vec3 previous = pow(texture(iChannel2, uv).rgb, vec3(1.0/p));
@@ -678,470 +929,273 @@ void main() {
     color = mix(color, previous, blendWeight);
     color = pow(color, vec3(p));
 #endif
-
     fragColor = vec4(saturate(color), 1.0);
 }`;
 
-// ─────────────────────────────────────────────────────────────────
-// BUFFER B  — bloom mipmap tree
-// iChannel0 = Buffer A output
-// ─────────────────────────────────────────────────────────────────
 const FS_B = `#version 300 es
 precision highp float;
 out vec4 fragColor;
 ${UNI}
-
 vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-
 vec3 Grab1(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave);
-    coord += offset; coord *= scale;
+    float scale = exp2(octave); coord += offset; coord *= scale;
     if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
     return ColorFetch(coord);
 }
-
 vec3 Grab4(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave);
-    coord += offset; coord *= scale;
+    float scale = exp2(octave); coord += offset; coord *= scale;
     if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0;
-    const int os = 4;
-    for (int i = 0; i < os; i++) for (int j = 0; j < os; j++) {
-        vec2 off = (vec2(i,j) / iResolution.xy) * scale / float(os);
-        color += ColorFetch(coord + off); weights += 1.0;
-    }
-    return color / weights;
+    vec3 color = vec3(0.0); float weights = 0.0; const int os = 4;
+    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
+    return color/weights;
 }
-
 vec3 Grab8(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave);
-    coord += offset; coord *= scale;
+    float scale = exp2(octave); coord += offset; coord *= scale;
     if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0;
-    const int os = 8;
-    for (int i = 0; i < os; i++) for (int j = 0; j < os; j++) {
-        vec2 off = (vec2(i,j) / iResolution.xy) * scale / float(os);
-        color += ColorFetch(coord + off); weights += 1.0;
-    }
-    return color / weights;
+    vec3 color = vec3(0.0); float weights = 0.0; const int os = 8;
+    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
+    return color/weights;
 }
-
 vec3 Grab16(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave);
-    coord += offset; coord *= scale;
+    float scale = exp2(octave); coord += offset; coord *= scale;
     if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0;
-    const int os = 16;
-    for (int i = 0; i < os; i++) for (int j = 0; j < os; j++) {
-        vec2 off = (vec2(i,j) / iResolution.xy) * scale / float(os);
-        color += ColorFetch(coord + off); weights += 1.0;
-    }
-    return color / weights;
+    vec3 color = vec3(0.0); float weights = 0.0; const int os = 16;
+    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
+    return color/weights;
 }
-
 vec2 CalcOffset(float octave) {
-    vec2 padding = vec2(10.0) / iResolution.xy;
-    vec2 offset = vec2(0.0);
-    offset.x = -min(1.0, floor(octave / 3.0)) * (0.25 + padding.x);
-    offset.y = -(1.0 - (1.0 / exp2(octave))) - padding.y * octave;
-    offset.y += min(1.0, floor(octave / 3.0)) * 0.35;
+    vec2 padding = vec2(10.0) / iResolution.xy; vec2 offset = vec2(0.0);
+    offset.x = -min(1.0, floor(octave/3.0)) * (0.25 + padding.x);
+    offset.y = -(1.0-(1.0/exp2(octave))) - padding.y*octave;
+    offset.y += min(1.0, floor(octave/3.0)) * 0.35;
     return offset;
 }
-
 void main() {
-    vec2 uv = gl_FragCoord.xy / iResolution.xy;
-    vec3 color = vec3(0.0);
-    color += Grab1 (uv, 1.0, CalcOffset(0.0));
-    color += Grab4 (uv, 2.0, CalcOffset(1.0));
-    color += Grab8 (uv, 3.0, CalcOffset(2.0));
-    color += Grab16(uv, 4.0, CalcOffset(3.0));
-    color += Grab16(uv, 5.0, CalcOffset(4.0));
-    color += Grab16(uv, 6.0, CalcOffset(5.0));
-    color += Grab16(uv, 7.0, CalcOffset(6.0));
-    color += Grab16(uv, 8.0, CalcOffset(7.0));
-    fragColor = vec4(color, 1.0);
+    vec2 uv = gl_FragCoord.xy / iResolution.xy; vec3 color = vec3(0.0);
+    color += Grab1 (uv,1.0,CalcOffset(0.0)); color += Grab4 (uv,2.0,CalcOffset(1.0));
+    color += Grab8 (uv,3.0,CalcOffset(2.0)); color += Grab16(uv,4.0,CalcOffset(3.0));
+    color += Grab16(uv,5.0,CalcOffset(4.0)); color += Grab16(uv,6.0,CalcOffset(5.0));
+    color += Grab16(uv,7.0,CalcOffset(6.0)); color += Grab16(uv,8.0,CalcOffset(7.0));
+    fragColor = vec4(color,1.0);
 }`;
 
-// ─────────────────────────────────────────────────────────────────
-// BUFFER C  — horizontal Gaussian blur
-// iChannel0 = Buffer B output
-// ─────────────────────────────────────────────────────────────────
 const FS_C = `#version 300 es
 precision highp float;
 out vec4 fragColor;
 ${UNI}
-
 vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-
 void main() {
-    float weights[5];
-    float offsets[5];
-    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139;
-    weights[3]=0.01037598; weights[4]=0.00025940;
-    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765;
-    offsets[3]=5.17647059; offsets[4]=7.05882353;
-
+    float weights[5]; float offsets[5];
+    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139; weights[3]=0.01037598; weights[4]=0.00025940;
+    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765; offsets[3]=5.17647059; offsets[4]=7.05882353;
     vec2 uv = gl_FragCoord.xy / iResolution.xy;
     vec3 color = vec3(0.0); float weightSum = 0.0;
-
     if (uv.x < 0.52) {
-        color += ColorFetch(uv) * weights[0];
-        weightSum += weights[0];
-        for (int i = 1; i < 5; i++) {
-            vec2 off = vec2(offsets[i]) / iResolution.xy;
-            color += ColorFetch(uv + off * vec2(0.5, 0.0)) * weights[i];
-            color += ColorFetch(uv - off * vec2(0.5, 0.0)) * weights[i];
-            weightSum += weights[i] * 2.0;
-        }
+        color += ColorFetch(uv) * weights[0]; weightSum += weights[0];
+        for (int i=1;i<5;i++) { vec2 off=vec2(offsets[i])/iResolution.xy; color+=ColorFetch(uv+off*vec2(0.5,0.0))*weights[i]; color+=ColorFetch(uv-off*vec2(0.5,0.0))*weights[i]; weightSum+=weights[i]*2.0; }
         color /= weightSum;
     }
-    fragColor = vec4(color, 1.0);
+    fragColor = vec4(color,1.0);
 }`;
 
-// ─────────────────────────────────────────────────────────────────
-// BUFFER D  — vertical Gaussian blur
-// iChannel0 = Buffer C output
-// ─────────────────────────────────────────────────────────────────
 const FS_D = `#version 300 es
 precision highp float;
 out vec4 fragColor;
 ${UNI}
-
 vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-
 void main() {
-    float weights[5];
-    float offsets[5];
-    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139;
-    weights[3]=0.01037598; weights[4]=0.00025940;
-    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765;
-    offsets[3]=5.17647059; offsets[4]=7.05882353;
-
+    float weights[5]; float offsets[5];
+    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139; weights[3]=0.01037598; weights[4]=0.00025940;
+    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765; offsets[3]=5.17647059; offsets[4]=7.05882353;
     vec2 uv = gl_FragCoord.xy / iResolution.xy;
     vec3 color = vec3(0.0); float weightSum = 0.0;
-
     if (uv.x < 0.52) {
-        color += ColorFetch(uv) * weights[0];
-        weightSum += weights[0];
-        for (int i = 1; i < 5; i++) {
-            vec2 off = vec2(offsets[i]) / iResolution.xy;
-            color += ColorFetch(uv + off * vec2(0.0, 0.5)) * weights[i];
-            color += ColorFetch(uv - off * vec2(0.0, 0.5)) * weights[i];
-            weightSum += weights[i] * 2.0;
-        }
+        color += ColorFetch(uv) * weights[0]; weightSum += weights[0];
+        for (int i=1;i<5;i++) { vec2 off=vec2(offsets[i])/iResolution.xy; color+=ColorFetch(uv+off*vec2(0.0,0.5))*weights[i]; color+=ColorFetch(uv-off*vec2(0.0,0.5))*weights[i]; weightSum+=weights[i]*2.0; }
         color /= weightSum;
     }
-    fragColor = vec4(color, 1.0);
+    fragColor = vec4(color,1.0);
 }`;
 
-// ─────────────────────────────────────────────────────────────────
-// IMAGE  — composite + tonemapping
-// iChannel0 = Buffer A (raw render), iChannel1 = Buffer D (bloom)
-// ─────────────────────────────────────────────────────────────────
 const FS_IMG = `#version 300 es
 precision highp float;
 out vec4 fragColor;
 ${UNI}
-
-float saturate(float x) { return clamp(x, 0.0, 1.0); }
-vec3  saturate(vec3  x) { return clamp(x, vec3(0.0), vec3(1.0)); }
-
-vec3 ColorFetch(vec2 coord)  { return texture(iChannel0, coord).rgb; }
-vec3 BloomFetch(vec2 coord)  { return texture(iChannel1, coord).rgb; }
-
+float saturate(float x) { return clamp(x,0.0,1.0); }
+vec3 saturate(vec3 x) { return clamp(x,vec3(0.0),vec3(1.0)); }
+vec3 ColorFetch(vec2 coord) { return texture(iChannel0,coord).rgb; }
+vec3 BloomFetch(vec2 coord) { return texture(iChannel1,coord).rgb; }
 vec2 CalcOffset(float octave) {
-    vec2 padding = vec2(10.0) / iResolution.xy;
-    vec2 offset = vec2(0.0);
-    offset.x = -min(1.0, floor(octave / 3.0)) * (0.25 + padding.x);
-    offset.y = -(1.0 - (1.0 / exp2(octave))) - padding.y * octave;
-    offset.y += min(1.0, floor(octave / 3.0)) * 0.35;
+    vec2 padding=vec2(10.0)/iResolution.xy; vec2 offset=vec2(0.0);
+    offset.x=-min(1.0,floor(octave/3.0))*(0.25+padding.x);
+    offset.y=-(1.0-(1.0/exp2(octave)))-padding.y*octave;
+    offset.y+=min(1.0,floor(octave/3.0))*0.35;
     return offset;
 }
-
 vec3 Grab(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave);
-    coord /= scale; coord -= offset;
-    return BloomFetch(coord);
+    float scale=exp2(octave); coord/=scale; coord-=offset; return BloomFetch(coord);
 }
-
 vec3 GetBloom(vec2 coord) {
-    vec3 bloom = vec3(0.0);
-    bloom += Grab(coord, 1.0, CalcOffset(0.0)) * 1.0;
-    bloom += Grab(coord, 2.0, CalcOffset(1.0)) * 1.5;
-    bloom += Grab(coord, 3.0, CalcOffset(2.0)) * 1.0;
-    bloom += Grab(coord, 4.0, CalcOffset(3.0)) * 1.5;
-    bloom += Grab(coord, 5.0, CalcOffset(4.0)) * 1.8;
-    bloom += Grab(coord, 6.0, CalcOffset(5.0)) * 1.0;
-    bloom += Grab(coord, 7.0, CalcOffset(6.0)) * 1.0;
-    bloom += Grab(coord, 8.0, CalcOffset(7.0)) * 1.0;
+    vec3 bloom=vec3(0.0);
+    bloom+=Grab(coord,1.0,CalcOffset(0.0))*1.0; bloom+=Grab(coord,2.0,CalcOffset(1.0))*1.5;
+    bloom+=Grab(coord,3.0,CalcOffset(2.0))*1.0; bloom+=Grab(coord,4.0,CalcOffset(3.0))*1.5;
+    bloom+=Grab(coord,5.0,CalcOffset(4.0))*1.8; bloom+=Grab(coord,6.0,CalcOffset(5.0))*1.0;
+    bloom+=Grab(coord,7.0,CalcOffset(6.0))*1.0; bloom+=Grab(coord,8.0,CalcOffset(7.0))*1.0;
     return bloom;
 }
-
 void main() {
-    vec2 uv = gl_FragCoord.xy / iResolution.xy;
-    vec3 color = ColorFetch(uv);
-    color += GetBloom(uv) * 0.08;
-    color *= 200.0;
-
-    color = pow(color, vec3(1.5));
-    color = color / (1.0 + color);
-    color = pow(color, vec3(1.0/1.5));
-    color = mix(color, color*color*(3.0-2.0*color), vec3(1.0));
-    color = pow(color, vec3(1.0, 1.05, 1.40));   // warm tint: compress B channel
-    color = saturate(color * 1.01);
-    color = pow(color, vec3(0.7/2.2));
-
-    fragColor = vec4(color, 1.0);
+    vec2 uv=gl_FragCoord.xy/iResolution.xy;
+    vec3 color=ColorFetch(uv); color+=GetBloom(uv)*0.08; color*=200.0;
+    color=pow(color,vec3(1.5)); color=color/(1.0+color); color=pow(color,vec3(1.0/1.5));
+    color=mix(color,color*color*(3.0-2.0*color),vec3(1.0));
+    color=pow(color,vec3(1.0,1.05,1.40)); color=saturate(color*1.01); color=pow(color,vec3(0.7/2.2));
+    fragColor=vec4(color,1.0);
 }`;
 
-// ─────────────────────────────────────────────────────────────────
-// JS INFRASTRUCTURE
-// ─────────────────────────────────────────────────────────────────
-
 function mkShader(type, src) {
-  const s = gl.createShader(type);
-  gl.shaderSource(s, src);
-  gl.compileShader(s);
-  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-    console.error('Shader compile error:', gl.getShaderInfoLog(s), '\n\nSource:\n', src.slice(0,300));
-    return null;
-  }
+  const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error('Shader error:', gl.getShaderInfoLog(s)); return null; }
   return s;
 }
-
 function mkProgram(fsSrc) {
-  const vs = mkShader(gl.VERTEX_SHADER, VS);
-  const fs = mkShader(gl.FRAGMENT_SHADER, fsSrc);
+  const vs = mkShader(gl.VERTEX_SHADER, VS); const fs = mkShader(gl.FRAGMENT_SHADER, fsSrc);
   if (!vs || !fs) return null;
-  const p = gl.createProgram();
-  gl.attachShader(p, vs); gl.attachShader(p, fs);
-  gl.linkProgram(p);
-  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
-    console.error('Link error:', gl.getProgramInfoLog(p));
-    return null;
-  }
+  const p = gl.createProgram(); gl.attachShader(p, vs); gl.attachShader(p, fs); gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.error('Link error:', gl.getProgramInfoLog(p)); return null; }
   return p;
 }
 
-// Build all programs — report first failure and bail
-const progA   = mkProgram(FS_A);
-const progB   = mkProgram(FS_B);
-const progC   = mkProgram(FS_C);
-const progD   = mkProgram(FS_D);
-const progImg = mkProgram(FS_IMG);
-if (!progA || !progB || !progC || !progD || !progImg) return;
+const progA=mkProgram(FS_A), progB=mkProgram(FS_B), progC=mkProgram(FS_C), progD=mkProgram(FS_D), progImg=mkProgram(FS_IMG);
+if (!progA||!progB||!progC||!progD||!progImg) return;
 
-// ── Full-screen quad VAO ──────────────────────────────────────────
-const vao = gl.createVertexArray();
-gl.bindVertexArray(vao);
-const vbo = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+const vao=gl.createVertexArray(); gl.bindVertexArray(vao);
+const vbo=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
 for (const p of [progA,progB,progC,progD,progImg]) {
-  gl.useProgram(p);
-  const loc = gl.getAttribLocation(p, 'a_pos');
-  if (loc >= 0) { gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0); }
+  gl.useProgram(p); const loc=gl.getAttribLocation(p,'a_pos');
+  if (loc>=0) { gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0); }
 }
 gl.bindVertexArray(null);
 
-// ── Procedural noise texture (256×256 RGBA) ───────────────────────
 function genNoise256(seed) {
-  const data = new Uint8Array(256 * 256 * 4);
-  const s = seed | 0;
-  for (let y = 0; y < 256; y++) {
-    for (let x = 0; x < 256; x++) {
-      const i = (y * 256 + x) * 4;
-      let h;
-      h = Math.imul((x^s) ^ (y*57), 0x9e3779b9); h ^= h>>>16; h = Math.imul(h, 0x85ebca6b); h ^= h>>>13;
-      data[i]   = h & 255;
-      h = Math.imul((x*31+s)^(y*73), 0x6c62272e); h ^= h>>>16; h = Math.imul(h, 0x27d4eb2f); h ^= h>>>15;
-      data[i+1] = h & 255;
-      h = Math.imul((x^37+s)+(y*101), 0x7fb5d329); h ^= h>>>16; h = Math.imul(h, 0xb55a4f09); h ^= h>>>15;
-      data[i+2] = h & 255;
-      h = Math.imul((x*17+s)^(y*41+13), 0x8da6b343); h ^= h>>>16; h = Math.imul(h, 0xd8163841); h ^= h>>>15;
-      data[i+3] = h & 255;
-    }
+  const data=new Uint8Array(256*256*4); const s=seed|0;
+  for (let y=0;y<256;y++) for (let x=0;x<256;x++) {
+    const i=(y*256+x)*4; let h;
+    h=Math.imul((x^s)^(y*57),0x9e3779b9); h^=h>>>16; h=Math.imul(h,0x85ebca6b); h^=h>>>13; data[i]=h&255;
+    h=Math.imul((x*31+s)^(y*73),0x6c62272e); h^=h>>>16; h=Math.imul(h,0x27d4eb2f); h^=h>>>15; data[i+1]=h&255;
+    h=Math.imul((x^37+s)+(y*101),0x7fb5d329); h^=h>>>16; h=Math.imul(h,0xb55a4f09); h^=h>>>15; data[i+2]=h&255;
+    h=Math.imul((x*17+s)^(y*41+13),0x8da6b343); h^=h>>>16; h=Math.imul(h,0xd8163841); h^=h>>>15; data[i+3]=h&255;
   }
   return data;
 }
 
-function mkTex(data, w, h, wrap) {
-  const t = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, t);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrap);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrap);
-  gl.generateMipmap(gl.TEXTURE_2D);
-  return t;
+function mkTex(data,w,h,wrap) {
+  const t=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,wrap);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,wrap);
+  gl.generateMipmap(gl.TEXTURE_2D); return t;
 }
 
-const noiseTex  = mkTex(genNoise256(0),  256, 256, gl.REPEAT);
-const noiseTex2 = mkTex(genNoise256(1),  256, 256, gl.REPEAT);
+const noiseTex=mkTex(genNoise256(0),256,256,gl.REPEAT);
+const noiseTex2=mkTex(genNoise256(1),256,256,gl.REPEAT);
 
-// ── FBO helpers ───────────────────────────────────────────────────
-function mkFBO(w, h) {
-  const tex = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, tex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  const fbo = gl.createFramebuffer();
-  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
-  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
-  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  return { fbo, tex, w, h };
+function mkFBO(w,h) {
+  const tex=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA16F,w,h,0,gl.RGBA,gl.HALF_FLOAT,null);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  const fbo=gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+  return {fbo,tex,w,h};
 }
 
-let W = 0, H = 0;
-let fboA0, fboA1, fboB, fboC, fboD;
+let W=0,H=0,fboA0,fboA1,fboB,fboC,fboD;
 
-function rebuildFBOs(w, h) {
-  [fboA0, fboA1, fboB, fboC, fboD].forEach(f => {
-    if (f) { gl.deleteTexture(f.tex); gl.deleteFramebuffer(f.fbo); }
-  });
-  fboA0 = mkFBO(w, h);
-  fboA1 = mkFBO(w, h);
-  fboB  = mkFBO(w, h);
-  fboC  = mkFBO(w, h);
-  fboD  = mkFBO(w, h);
-  W = w; H = h;
+function rebuildFBOs(w,h) {
+  [fboA0,fboA1,fboB,fboC,fboD].forEach(f=>{if(f){gl.deleteTexture(f.tex);gl.deleteFramebuffer(f.fbo);}});
+  fboA0=mkFBO(w,h); fboA1=mkFBO(w,h); fboB=mkFBO(w,h); fboC=mkFBO(w,h); fboD=mkFBO(w,h);
+  W=w; H=h;
 }
 
-// ── Pre-cache uniform locations ───────────────────────────────────
 function cacheUniforms(prog) {
   gl.useProgram(prog);
-  return {
-    iResolution: gl.getUniformLocation(prog, 'iResolution'),
-    iTime:       gl.getUniformLocation(prog, 'iTime'),
-    iFrame:      gl.getUniformLocation(prog, 'iFrame'),
-    iMouse:      gl.getUniformLocation(prog, 'iMouse'),
-    iChannel0:   gl.getUniformLocation(prog, 'iChannel0'),
-    iChannel1:   gl.getUniformLocation(prog, 'iChannel1'),
-    iChannel2:   gl.getUniformLocation(prog, 'iChannel2'),
-    iChannel3:   gl.getUniformLocation(prog, 'iChannel3'),
-  };
+  return { iResolution:gl.getUniformLocation(prog,'iResolution'), iTime:gl.getUniformLocation(prog,'iTime'),
+           iFrame:gl.getUniformLocation(prog,'iFrame'), iMouse:gl.getUniformLocation(prog,'iMouse'),
+           iChannel0:gl.getUniformLocation(prog,'iChannel0'), iChannel1:gl.getUniformLocation(prog,'iChannel1'),
+           iChannel2:gl.getUniformLocation(prog,'iChannel2'), iChannel3:gl.getUniformLocation(prog,'iChannel3') };
 }
-const uA   = cacheUniforms(progA);
-const uB   = cacheUniforms(progB);
-const uC   = cacheUniforms(progC);
-const uD   = cacheUniforms(progD);
-const uImg = cacheUniforms(progImg);
+const uA=cacheUniforms(progA),uB=cacheUniforms(progB),uC=cacheUniforms(progC),uD=cacheUniforms(progD),uImg=cacheUniforms(progImg);
 
-function setUniforms(prog, u, w, h, t, frame, mouse) {
-  gl.useProgram(prog);
-  gl.uniform3f(u.iResolution, w, h, 1.0);
-  gl.uniform1f(u.iTime, t);
-  gl.uniform1i(u.iFrame, frame);
-  gl.uniform4fv(u.iMouse, mouse);
+function setUniforms(prog,u,w,h,t,frame,mouse) {
+  gl.useProgram(prog); gl.uniform3f(u.iResolution,w,h,1.0); gl.uniform1f(u.iTime,t);
+  gl.uniform1i(u.iFrame,frame); gl.uniform4fv(u.iMouse,mouse);
+}
+function bindTex(u,unit,name,tex) {
+  gl.activeTexture(gl.TEXTURE0+unit); gl.bindTexture(gl.TEXTURE_2D,tex); gl.uniform1i(u[name],unit);
 }
 
-function bindTex(u, unit, name, tex) {
-  gl.activeTexture(gl.TEXTURE0 + unit);
-  gl.bindTexture(gl.TEXTURE_2D, tex);
-  gl.uniform1i(u[name], unit);
-}
-
-// ── Resize ────────────────────────────────────────────────────────
 function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
-  const w = Math.round(canvas.offsetWidth  * dpr);
-  const h = Math.round(canvas.offsetHeight * dpr);
-  if (w === W && h === H) return;
-  canvas.width = w; canvas.height = h;
-  rebuildFBOs(w, h);
+  const dpr=Math.min(window.devicePixelRatio||1,1.25);
+  const w=Math.round(canvas.offsetWidth*dpr), h=Math.round(canvas.offsetHeight*dpr);
+  if (w===W&&h===H) return;
+  canvas.width=w; canvas.height=h; rebuildFBOs(w,h);
 }
-
-window.addEventListener('resize', resize, { passive: true });
+window.addEventListener('resize',resize,{passive:true});
 resize();
 
-// ── Mouse ──────────────────────────────────────────────────────────
-let mouse = [0, 0, 0, 0];
-canvas.addEventListener('mousemove', e => {
-  const r = canvas.getBoundingClientRect();
-  const dpr = canvas.width / r.width;
-  mouse[0] = (e.clientX - r.left) * dpr;
-  mouse[1] = H - (e.clientY - r.top) * dpr;
-  if (e.buttons) { mouse[2] = mouse[0]; mouse[3] = mouse[1]; }
+let mouse=[0,0,0,0];
+canvas.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect(), dpr=canvas.width/r.width;
+  mouse[0]=(e.clientX-r.left)*dpr; mouse[1]=H-(e.clientY-r.top)*dpr;
+  if(e.buttons){mouse[2]=mouse[0];mouse[3]=mouse[1];}
 });
-canvas.addEventListener('mousedown', e => { mouse[2] = mouse[0]; mouse[3] = mouse[1]; });
-canvas.addEventListener('mouseup',   () => { mouse[2] = 0; mouse[3] = 0; });
+canvas.addEventListener('mousedown',()=>{mouse[2]=mouse[0];mouse[3]=mouse[1];});
+canvas.addEventListener('mouseup',()=>{mouse[2]=0;mouse[3]=0;});
 
-// ── Render loop ───────────────────────────────────────────────────
-let frame = 0;
-let pingPong = false; // which fboA is "current" output
+let frameN=0, pingPong=false;
 
-function draw(prog) {
-  gl.bindVertexArray(vao);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
-  gl.bindVertexArray(null);
-}
+function draw() { gl.bindVertexArray(vao); gl.drawArrays(gl.TRIANGLES,0,6); gl.bindVertexArray(null); }
 
 function render(ts) {
-  const t = ts * 0.001;
+  const t=ts*0.001;
   resize();
+  const fboACurr=pingPong?fboA1:fboA0, fboAPrev=pingPong?fboA0:fboA1;
 
-  const fboACurr = pingPong ? fboA1 : fboA0;
-  const fboAPrev = pingPong ? fboA0 : fboA1;
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fboACurr.fbo); gl.viewport(0,0,W,H);
+  setUniforms(progA,uA,W,H,t,frameN,mouse);
+  bindTex(uA,0,'iChannel0',noiseTex); bindTex(uA,1,'iChannel1',noiseTex2); bindTex(uA,2,'iChannel2',fboAPrev.tex);
+  draw();
 
-  // ── Pass A: main render ───────────────────────────────────────
-  gl.bindFramebuffer(gl.FRAMEBUFFER, fboACurr.fbo);
-  gl.viewport(0, 0, W, H);
-  setUniforms(progA, uA, W, H, t, frame, mouse);
-  bindTex(uA, 0, 'iChannel0', noiseTex);
-  bindTex(uA, 1, 'iChannel1', noiseTex2);
-  bindTex(uA, 2, 'iChannel2', fboAPrev.tex);
-  draw(progA);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fboB.fbo); gl.viewport(0,0,W,H);
+  setUniforms(progB,uB,W,H,t,frameN,mouse); bindTex(uB,0,'iChannel0',fboACurr.tex); draw();
 
-  // ── Pass B: bloom mipmap ──────────────────────────────────────
-  gl.bindFramebuffer(gl.FRAMEBUFFER, fboB.fbo);
-  setUniforms(progB, uB, W, H, t, frame, mouse);
-  bindTex(uB, 0, 'iChannel0', fboACurr.tex);
-  draw(progB);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fboC.fbo); gl.viewport(0,0,W,H);
+  setUniforms(progC,uC,W,H,t,frameN,mouse); bindTex(uC,0,'iChannel0',fboB.tex); draw();
 
-  // ── Pass C: H-blur ────────────────────────────────────────────
-  gl.bindFramebuffer(gl.FRAMEBUFFER, fboC.fbo);
-  setUniforms(progC, uC, W, H, t, frame, mouse);
-  bindTex(uC, 0, 'iChannel0', fboB.tex);
-  draw(progC);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fboD.fbo); gl.viewport(0,0,W,H);
+  setUniforms(progD,uD,W,H,t,frameN,mouse); bindTex(uD,0,'iChannel0',fboC.tex); draw();
 
-  // ── Pass D: V-blur ────────────────────────────────────────────
-  gl.bindFramebuffer(gl.FRAMEBUFFER, fboD.fbo);
-  setUniforms(progD, uD, W, H, t, frame, mouse);
-  bindTex(uD, 0, 'iChannel0', fboC.tex);
-  draw(progD);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null); gl.viewport(0,0,W,H);
+  setUniforms(progImg,uImg,W,H,t,frameN,mouse);
+  bindTex(uImg,0,'iChannel0',fboACurr.tex); bindTex(uImg,1,'iChannel1',fboD.tex); draw();
 
-  // ── Composite to screen ───────────────────────────────────────
-  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  gl.viewport(0, 0, W, H);
-  setUniforms(progImg, uImg, W, H, t, frame, mouse);
-  bindTex(uImg, 0, 'iChannel0', fboACurr.tex);
-  bindTex(uImg, 1, 'iChannel1', fboD.tex);
-  draw(progImg);
-
-  pingPong = !pingPong;
-  frame++;
-  if (!reduced) requestAnimationFrame(render);
+  pingPong=!pingPong; frameN++;
+  if(!reduced) requestAnimationFrame(render);
 }
 
-if (reduced) {
-  render(0);
-} else {
-  requestAnimationFrame(render);
-}
+reduced ? render(0) : requestAnimationFrame(render);
 
-// ── Parallax on scroll ────────────────────────────────────────────
-const hero = canvas.closest('.hero');
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const heroH   = hero ? hero.offsetHeight : window.innerHeight;
-  if (scrollY < heroH) {
-    canvas.style.transform = `translateY(${scrollY * 0.45}px)`;
-  }
-}, { passive: true });
+const hero=canvas.closest('.hero');
+window.addEventListener('scroll',()=>{
+  const scrollY=window.scrollY, heroH=hero?hero.offsetHeight:window.innerHeight;
+  if(scrollY<heroH) canvas.style.transform=`translateY(${scrollY*0.45}px)`;
+},{passive:true});
 
 })();
 </script>
