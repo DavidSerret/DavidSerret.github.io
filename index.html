@@ -13,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Devicons CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,8 +67,6 @@
       z-index: 1;
     }
 
-    /* ── NAV ──────────────────────────────────────── */
-
     nav {
       position: relative;
       z-index: 10;
@@ -107,8 +104,6 @@
 
     .nav-links a:hover { color: var(--accent); }
     .nav-links svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-    /* ── HERO BODY ────────────────────────────────── */
 
     .hero-body {
       position: relative;
@@ -164,18 +159,8 @@
       letter-spacing: -0.01em;
     }
 
-    .hero-text .role {
-      font-size: clamp(0.85rem, 1.8vw, 1rem);
-      color: var(--text-sec);
-      margin-bottom: 0.35rem;
-    }
-
-    .hero-text .loc {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-    }
+    .hero-text .role { font-size: clamp(0.85rem, 1.8vw, 1rem); color: var(--text-sec); margin-bottom: 0.35rem; }
+    .hero-text .loc { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.06em; }
 
     .scroll-cue {
       position: absolute;
@@ -215,12 +200,7 @@
 
     /* ── STACK ICONS ──────────────────────────────── */
 
-    .stack-icons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      align-items: center;
-    }
+    .stack-icons { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
 
     .stack-icons i {
       font-size: 1.6rem;
@@ -228,20 +208,11 @@
       transition: color 0.2s, transform 0.2s;
     }
 
-    .stack-icons i:hover {
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .stack-icons i:hover { color: var(--accent); transform: translateY(-2px); }
 
-    /* ── PROJECT LIST ─────────────────────────────── */
+    /* ── PROJECT CARDS ────────────────────────────── */
 
-    .project-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    /* ── PROJECT CARD (accordion) ─────────────────── */
+    .project-list { display: flex; flex-direction: column; gap: 0.5rem; }
 
     .card {
       background: var(--surface);
@@ -253,7 +224,6 @@
 
     .card:hover { border-color: var(--accent-alt); }
 
-    /* Header row — always visible, clickable */
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -266,7 +236,6 @@
     }
 
     .card-header::-webkit-details-marker { display: none; }
-
     .card-header-left { flex: 1; min-width: 0; }
 
     .card-name {
@@ -287,17 +256,8 @@
       text-overflow: ellipsis;
     }
 
-    .card-header-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-shrink: 0;
-    }
-
-    .card-links-inline {
-      display: flex;
-      gap: 0.85rem;
-    }
+    .card-header-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .card-links-inline { display: flex; gap: 0.85rem; }
 
     .card-links-inline a {
       font-family: 'DM Mono', monospace;
@@ -310,21 +270,15 @@
 
     .card-links-inline a:hover { color: var(--accent-alt); text-decoration: underline; }
 
-    /* Chevron */
     .chevron {
-      width: 14px;
-      height: 14px;
+      width: 14px; height: 14px;
       color: var(--text-muted);
       transition: transform 0.25s ease, color 0.2s;
       flex-shrink: 0;
     }
 
-    details[open] .chevron {
-      transform: rotate(180deg);
-      color: var(--accent);
-    }
+    details[open] .chevron { transform: rotate(180deg); color: var(--accent); }
 
-    /* Expanded panel */
     .card-body {
       border-top: 1px solid var(--border);
       overflow: hidden;
@@ -336,17 +290,15 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Screenshot placeholder */
     .card-screenshot {
       width: 100%;
       aspect-ratio: 16/9;
       background: var(--surface2);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
       border-bottom: 1px solid var(--border);
+      overflow: hidden;
     }
 
     .card-screenshot img {
@@ -363,12 +315,7 @@
       gap: 0.5rem;
     }
 
-    .screenshot-ph svg {
-      width: 28px;
-      height: 28px;
-      color: var(--text-muted);
-      opacity: 0.4;
-    }
+    .screenshot-ph svg { width: 28px; height: 28px; color: var(--text-muted); opacity: 0.4; }
 
     .screenshot-ph span {
       font-family: 'DM Mono', monospace;
@@ -386,19 +333,9 @@
       gap: 1.5rem;
     }
 
-    .card-desc {
-      font-size: 0.875rem;
-      color: var(--text-sec);
-      line-height: 1.75;
-      flex: 1;
-    }
+    .card-desc { font-size: 0.875rem; color: var(--text-sec); line-height: 1.75; flex: 1; }
 
-    .card-links-expanded {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
+    .card-links-expanded { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; }
 
     .card-links-expanded a {
       font-family: 'DM Mono', monospace;
@@ -407,44 +344,30 @@
       text-decoration: none;
       white-space: nowrap;
       transition: color 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
 
     .card-links-expanded a:hover { color: var(--accent-alt); text-decoration: underline; }
 
-    /* ── FOOTER ───────────────────────────────────── */
-
     footer { text-align: center; padding-top: 0.5rem; }
 
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      line-height: 2;
-    }
-
-    /* ── ANIMS ────────────────────────────────────── */
+    footer p { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-muted); line-height: 2; }
 
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(12px); }
       to   { opacity:1; transform:translateY(0); }
     }
 
-    .about    { animation: fadeUp 0.5s ease both 0.05s; }
-    .stack-section { animation: fadeUp 0.5s ease both 0.1s; }
-    .projects { animation: fadeUp 0.5s ease both 0.15s; }
-    footer    { animation: fadeUp 0.5s ease both 0.25s; }
-
-    /* ── MOBILE ───────────────────────────────────── */
+    .about         { animation: fadeUp 0.5s ease both 0.05s; }
+    .stack-section { animation: fadeUp 0.5s ease both 0.10s; }
+    .projects      { animation: fadeUp 0.5s ease both 0.15s; }
+    footer         { animation: fadeUp 0.5s ease both 0.25s; }
 
     @media (max-width: 500px) {
-      .hero-inner { flex-direction: column; text-align: center; gap: 1.2rem; }
-      .nav-label  { display: none; }
-      .card-desc-area { flex-direction: column; }
+      .hero-inner          { flex-direction: column; text-align: center; gap: 1.2rem; }
+      .nav-label           { display: none; }
+      .card-desc-area      { flex-direction: column; }
       .card-links-expanded { flex-direction: row; }
-      .card-stack { white-space: normal; }
+      .card-stack          { white-space: normal; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -547,14 +470,11 @@
         </summary>
         <div class="card-body">
           <div class="card-screenshot">
-            <!-- Replace with: <img src="screenshots/routr.png" alt="Routr screenshot"> -->
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · routr.png</span>
-            </div>
+            <img src="screenshots/routr-landing.png" alt="Routr screenshot"
+                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/routr-landing.png</span></div>'">
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">Flight search reimagined. Multi-airport group selection, open-jaw route optimization, and a real-time price calendar — built on live flight data from the Duffel API with Redis caching.</p>
+            <p class="card-desc">Flight search reimagined. Search across multiple origin and destination airports simultaneously, filter by layover duration, cabin class and stops, and browse a full price calendar to shift dates and save. Built on live flight data from the Duffel API with Redis caching.</p>
             <div class="card-links-expanded">
               <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
               <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
@@ -563,31 +483,31 @@
         </div>
       </details>
 
-      <!-- DialysisX -->
+      <!-- Checklist Bot -->
       <details class="card">
         <summary class="card-header">
           <div class="card-header-left">
-            <p class="card-name">DialysisX</p>
-            <p class="card-stack">TypeScript · Node.js · React · WebSocket</p>
+            <p class="card-name">Checklist Bot</p>
+            <p class="card-stack">Next.js · NextAuth · Supabase · Tailwind · Python</p>
           </div>
           <div class="card-header-right">
             <div class="card-links-inline">
-              <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
+              <a href="https://checklist-bot-production-2df8.up.railway.app/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Live ↗</a>
+              <a href="https://github.com/DavidSerret/discord-bot" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
             </div>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </summary>
         <div class="card-body">
           <div class="card-screenshot">
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · dialysisx.png</span>
-            </div>
+            <img src="screenshots/checklist-bot.png" alt="Checklist Bot screenshot"
+                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/checklist-bot.png</span></div>'">
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">Gamified cycling simulation for dialysis ward patients. Pedal devices stream real-time data to a ward-wide race format, turning treatment sessions into a shared experience.</p>
+            <p class="card-desc">Task management web app for Discord teams. Sign in with Discord OAuth, organize work into hierarchical projects, sections and subsections, assign tasks to multiple members, and track progress in real time with sprint support. Includes a companion Python bot for in-channel task management.</p>
             <div class="card-links-expanded">
-              <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+              <a href="https://checklist-bot-production-2df8.up.railway.app/" target="_blank" rel="noopener noreferrer">Live ↗</a>
+              <a href="https://github.com/DavidSerret/discord-bot" target="_blank" rel="noopener noreferrer">Repo ↗</a>
             </div>
           </div>
         </div>
@@ -598,10 +518,11 @@
         <summary class="card-header">
           <div class="card-header-left">
             <p class="card-name">Strikepool</p>
-            <p class="card-stack">TypeScript · Next.js · Supabase · Tailwind</p>
+            <p class="card-stack">Next.js · TypeScript · Supabase · Tailwind · Resend</p>
           </div>
           <div class="card-header-right">
             <div class="card-links-inline">
+              <a href="https://strikepool.vercel.app/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Live ↗</a>
               <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
             </div>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -609,14 +530,13 @@
         </summary>
         <div class="card-body">
           <div class="card-screenshot">
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · strikepool.png</span>
-            </div>
+            <img src="screenshots/strikepool.png" alt="Strikepool screenshot"
+                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/strikepool.png</span></div>'">
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">Table reservation system for a billiard bar. WhatsApp confirmation flow, real-time availability, and an admin dashboard for managing bookings and walk-ins.</p>
+            <p class="card-desc">Real client project for a billiard bar in Terrassa. Customers see table availability in real time via Supabase Realtime and book directly from their phone. Owners manage reservations, block time slots and view the weekly calendar from a protected admin panel. Email confirmations and reminders via Resend.</p>
             <div class="card-links-expanded">
+              <a href="https://strikepool.vercel.app/" target="_blank" rel="noopener noreferrer">Live ↗</a>
               <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
             </div>
           </div>
@@ -632,6 +552,7 @@
           </div>
           <div class="card-header-right">
             <div class="card-links-inline">
+              <a href="https://happinest.fly.dev/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Live ↗</a>
               <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Repo ↗</a>
             </div>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -639,14 +560,13 @@
         </summary>
         <div class="card-body">
           <div class="card-screenshot">
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · happinest.png</span>
-            </div>
+            <img src="screenshots/happinest.png" alt="Happinest screenshot"
+                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/happinest.png</span></div>'">
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">Web platform for an animal shelter. Adoption listings, volunteer coordination, and a foster family management system — built to help animals find homes faster.</p>
+            <p class="card-desc">Web platform for animal shelters. Adoption listings, volunteer coordination, foster family management, and a blog covering pet care and animal welfare. Built to help shelters connect animals with people faster.</p>
             <div class="card-links-expanded">
+              <a href="https://happinest.fly.dev/" target="_blank" rel="noopener noreferrer">Live ↗</a>
               <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
             </div>
           </div>
@@ -658,7 +578,7 @@
         <summary class="card-header">
           <div class="card-header-left">
             <p class="card-name">DeskUp</p>
-            <p class="card-stack">Laravel · PHP · MQTT · Tailwind</p>
+            <p class="card-stack">Laravel · Python · Tailwind · Docker · Raspberry Pi Pico W</p>
           </div>
           <div class="card-header-right">
             <div class="card-links-inline">
@@ -671,11 +591,11 @@
           <div class="card-screenshot">
             <div class="screenshot-ph">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · deskup.png</span>
+              <span>screenshots/deskup.png</span>
             </div>
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">IoT monitoring app for height-adjustable desks. Tracks usage patterns, sitting and standing time, and sends nudge notifications to encourage healthier work habits.</p>
+            <p class="card-desc">Smart office platform for height-adjustable desks. Real-time height control, user session tracking, automated cleaning schedules, ergonomic AI analyzer via MediaPipe, and a Raspberry Pi Pico W embedded controller — all orchestrated with Docker.</p>
             <div class="card-links-expanded">
               <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
             </div>
@@ -688,7 +608,7 @@
         <summary class="card-header">
           <div class="card-header-left">
             <p class="card-name">HPO Analyzer</p>
-            <p class="card-stack">C# · Avalonia · .NET</p>
+            <p class="card-stack">C# · Avalonia · .NET · Danfoss</p>
           </div>
           <div class="card-header-right">
             <div class="card-links-inline">
@@ -700,13 +620,11 @@
         </summary>
         <div class="card-body">
           <div class="card-screenshot">
-            <div class="screenshot-ph">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>screenshot · hpo.png</span>
-            </div>
+            <img src="screenshots/hpo-optimizer.png" alt="HPO Analyzer screenshot"
+                 onerror="this.parentElement.innerHTML='<div class=\'screenshot-ph\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg><span>screenshots/hpo-optimizer.png</span></div>'">
           </div>
           <div class="card-desc-area">
-            <p class="card-desc">Desktop tool for heat production optimization analysis. Processes industrial sensor data to identify efficiency patterns and flag anomalies in heating system output.</p>
+            <p class="card-desc">Desktop tool built in collaboration with Danfoss to optimize industrial heat production. Processes real operational data, runs a multi-parameter algorithm across winter and summer scenarios (production cost, CO₂, fuel efficiency), and presents results in interactive charts with export support.</p>
             <div class="card-links-expanded">
               <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
               <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
@@ -726,7 +644,6 @@
   </footer>
 </main>
 
-<!-- Black hole WebGL (preserved from your commit) -->
 <script>
 (function () {
 'use strict';
@@ -737,10 +654,7 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
 if (!gl) { console.warn('WebGL 2 not available'); return; }
-
-if (!gl.getExtension('EXT_color_buffer_float')) {
-  console.warn('EXT_color_buffer_float not supported'); return;
-}
+if (!gl.getExtension('EXT_color_buffer_float')) { console.warn('EXT_color_buffer_float not supported'); return; }
 
 const VS = `#version 300 es
 in vec2 a_pos;
@@ -761,440 +675,206 @@ const FS_A = `#version 300 es
 precision highp float;
 out vec4 fragColor;
 ${UNI}
-
 #define ITERATIONS 200
 #define TEMPORAL_AA
-
 const vec3 MainColor = vec3(1.0, 0.96, 0.86);
-
 float saturate(float x) { return clamp(x, 0.0, 1.0); }
 vec3  saturate(vec3  x) { return clamp(x, vec3(0.0), vec3(1.0)); }
-
-float rand(vec2 coord) {
-    return saturate(fract(sin(dot(coord, vec2(12.9898, 78.223))) * 43758.5453));
-}
-
+float rand(vec2 coord) { return saturate(fract(sin(dot(coord, vec2(12.9898, 78.223))) * 43758.5453)); }
 float noise(in vec3 x) {
-    vec3 p = floor(x); vec3 f = fract(x);
-    f = f*f*(3.0-2.0*f);
+    vec3 p = floor(x); vec3 f = fract(x); f = f*f*(3.0-2.0*f);
     vec2 uv = (p.xy + vec2(37.0,17.0)*p.z) + f.xy;
     vec2 rg = textureLod(iChannel0, (uv + 0.5)/256.0, 0.0).yx;
     return -1.0 + 2.0*mix(rg.x, rg.y, f.z);
 }
-
 vec3 rotate(vec3 p, float x, float y, float z) {
     mat3 matx = mat3(1.0,0.0,0.0, 0.0,cos(x),sin(x), 0.0,-sin(x),cos(x));
     mat3 maty = mat3(cos(y),0.0,-sin(y), 0.0,1.0,0.0, sin(y),0.0,cos(y));
     mat3 matz = mat3(cos(z),sin(z),0.0, -sin(z),cos(z),0.0, 0.0,0.0,1.0);
-    p = matx * p; p = matz * p; p = maty * p;
-    return p;
+    p = matx * p; p = matz * p; p = maty * p; return p;
 }
-
-float pcurve(float x, float a, float b) {
-    float k = pow(a+b,a+b) / (pow(a,a)*pow(b,b));
-    return k * pow(x, a) * pow(1.0-x, b);
-}
-
-float sdTorus(vec3 p, vec2 t) {
-    vec2 q = vec2(length(p.xz) - t.x, p.y);
-    return length(q) - t.y;
-}
-
+float pcurve(float x, float a, float b) { float k = pow(a+b,a+b)/(pow(a,a)*pow(b,b)); return k*pow(x,a)*pow(1.0-x,b); }
+float sdTorus(vec3 p, vec2 t) { vec2 q = vec2(length(p.xz)-t.x,p.y); return length(q)-t.y; }
 void Haze(inout vec3 color, vec3 pos, float alpha) {
-    vec2 t = vec2(1.0, 0.01);
-    float torusDist = length(sdTorus(pos + vec3(0.0,-0.05,0.0), t));
-    float bloomDisc = 1.0 / (pow(torusDist, 2.0) + 0.001);
-    vec3 col = MainColor;
-    bloomDisc *= length(pos) < 1.0 ? 0.0 : 1.0;
-    color += col * bloomDisc * (2.9 / float(ITERATIONS)) * (1.0 - alpha);
+    float torusDist = length(sdTorus(pos+vec3(0.0,-0.05,0.0), vec2(1.0,0.01)));
+    float bloomDisc = 1.0/(pow(torusDist,2.0)+0.001);
+    bloomDisc *= length(pos)<1.0?0.0:1.0;
+    color += MainColor*bloomDisc*(2.9/float(ITERATIONS))*(1.0-alpha);
 }
-
 void GasDisc(inout vec3 color, inout float alpha, vec3 pos) {
-    float discRadius = 3.2, discWidth = 5.3;
-    float discInner = discRadius - discWidth * 0.5;
-    float discOuter = discRadius + discWidth * 0.5;
-    vec3 origin = vec3(0.0);
-    vec3 discNormal = vec3(0.0, 1.0, 0.0);
-    float discThickness = 0.1;
-
-    float distFromCenter = distance(pos, origin);
-    float distFromDisc   = dot(discNormal, pos - origin);
-
-    float radialGradient = 1.0 - saturate((distFromCenter - discInner) / discWidth * 0.5);
-    float coverage = pcurve(radialGradient, 4.0, 0.9);
-    discThickness *= radialGradient;
-    coverage *= saturate(1.0 - abs(distFromDisc) / discThickness);
-
-    vec3 dustColorLit = MainColor;
-    float dustGlow = 1.0 / (pow(1.0 - radialGradient, 2.0) * 290.0 + 0.002);
-    vec3 dustColor = dustColorLit * dustGlow * 8.2;
-    coverage = saturate(coverage * 0.7);
-
-    float fade = pow((abs(distFromCenter - discInner) + 0.4), 4.0) * 0.04;
-    float bloomFactor = 1.0 / (pow(distFromDisc, 2.0) * 40.0 + fade + 0.00002);
-    vec3 b = dustColorLit * pow(bloomFactor, 1.5);
-    b *= mix(vec3(1.0, 0.75, 0.38), vec3(1.85, 1.55, 1.0), vec3(pow(radialGradient, 2.0)));
-    b *= mix(vec3(1.45, 0.82, 0.28), vec3(1.0, 0.97, 0.88), vec3(pow(radialGradient, 0.5)));
-
-    dustColor = mix(dustColor, b * 150.0, saturate(1.0 - coverage));
-    coverage  = saturate(coverage + bloomFactor * bloomFactor * 0.1);
-    if (coverage < 0.01) return;
-
-    vec3 radialCoords;
-    radialCoords.x = distFromCenter * 1.5 + 0.55;
-    radialCoords.y = atan(-pos.x, -pos.z) * 1.5;
-    radialCoords.z = distFromDisc * 1.5;
-    radialCoords *= 0.95;
-
-    float speed = 0.06;
-    float noise1 = 1.0;
-    vec3 rc = radialCoords;
-    rc.y += iTime*speed; noise1 *= noise(rc*3.0)*0.5+0.5;
-    rc.y -= iTime*speed; noise1 *= noise(rc*6.0)*0.5+0.5;
-    rc.y += iTime*speed; noise1 *= noise(rc*12.0)*0.5+0.5;
-    rc.y -= iTime*speed; noise1 *= noise(rc*24.0)*0.5+0.5;
-
-    float noise2 = 2.0;
-    rc = radialCoords + 30.0;
-    rc.y += iTime*speed; noise2 *= noise(rc*3.0)*0.5+0.5;
-    rc.y -= iTime*speed; noise2 *= noise(rc*6.0)*0.5+0.5;
-    rc.y += iTime*speed; noise2 *= noise(rc*12.0)*0.5+0.5;
-    rc.y -= iTime*speed; noise2 *= noise(rc*24.0)*0.5+0.5;
-    rc.y += iTime*speed; noise2 *= noise(rc*48.0)*0.5+0.5;
-    rc.y -= iTime*speed; noise2 *= noise(rc*92.0)*0.5+0.5;
-
-    dustColor *= noise1 * 0.998 + 0.002;
-    coverage  *= noise2;
-
-    radialCoords.y += iTime * speed * 0.5;
-    dustColor *= pow(texture(iChannel1, radialCoords.yx * vec2(0.15, 0.27)).rgb, vec3(2.0)) * 4.0;
-    coverage = saturate(coverage);
-
-    color += dustColor * coverage * (1.0 - alpha);
-    alpha += coverage * (1.0 - alpha);
+    float discRadius=3.2, discWidth=5.3;
+    float discInner=discRadius-discWidth*0.5;
+    float distFromCenter=distance(pos,vec3(0.0));
+    float distFromDisc=dot(vec3(0.0,1.0,0.0),pos);
+    float radialGradient=1.0-saturate((distFromCenter-discInner)/discWidth*0.5);
+    float coverage=pcurve(radialGradient,4.0,0.9);
+    float discThickness=0.1*radialGradient;
+    coverage *= saturate(1.0-abs(distFromDisc)/discThickness);
+    vec3 dustColorLit=MainColor;
+    float dustGlow=1.0/(pow(1.0-radialGradient,2.0)*290.0+0.002);
+    vec3 dustColor=dustColorLit*dustGlow*8.2;
+    coverage=saturate(coverage*0.7);
+    float fade=pow((abs(distFromCenter-discInner)+0.4),4.0)*0.04;
+    float bloomFactor=1.0/(pow(distFromDisc,2.0)*40.0+fade+0.00002);
+    vec3 b=dustColorLit*pow(bloomFactor,1.5);
+    b *= mix(vec3(1.0,0.75,0.38),vec3(1.85,1.55,1.0),vec3(pow(radialGradient,2.0)));
+    b *= mix(vec3(1.45,0.82,0.28),vec3(1.0,0.97,0.88),vec3(pow(radialGradient,0.5)));
+    dustColor=mix(dustColor,b*150.0,saturate(1.0-coverage));
+    coverage=saturate(coverage+bloomFactor*bloomFactor*0.1);
+    if(coverage<0.01) return;
+    vec3 radialCoords; radialCoords.x=distFromCenter*1.5+0.55; radialCoords.y=atan(-pos.x,-pos.z)*1.5; radialCoords.z=distFromDisc*1.5; radialCoords*=0.95;
+    float speed=0.06; float noise1=1.0; vec3 rc=radialCoords;
+    rc.y+=iTime*speed; noise1*=noise(rc*3.0)*0.5+0.5; rc.y-=iTime*speed; noise1*=noise(rc*6.0)*0.5+0.5;
+    rc.y+=iTime*speed; noise1*=noise(rc*12.0)*0.5+0.5; rc.y-=iTime*speed; noise1*=noise(rc*24.0)*0.5+0.5;
+    float noise2=2.0; rc=radialCoords+30.0;
+    rc.y+=iTime*speed; noise2*=noise(rc*3.0)*0.5+0.5; rc.y-=iTime*speed; noise2*=noise(rc*6.0)*0.5+0.5;
+    rc.y+=iTime*speed; noise2*=noise(rc*12.0)*0.5+0.5; rc.y-=iTime*speed; noise2*=noise(rc*24.0)*0.5+0.5;
+    rc.y+=iTime*speed; noise2*=noise(rc*48.0)*0.5+0.5; rc.y-=iTime*speed; noise2*=noise(rc*92.0)*0.5+0.5;
+    dustColor*=noise1*0.998+0.002; coverage*=noise2;
+    radialCoords.y+=iTime*speed*0.5;
+    dustColor*=pow(texture(iChannel1,radialCoords.yx*vec2(0.15,0.27)).rgb,vec3(2.0))*4.0;
+    coverage=saturate(coverage);
+    color+=dustColor*coverage*(1.0-alpha); alpha+=coverage*(1.0-alpha);
 }
-
 void WarpSpace(inout vec3 eyevec, inout vec3 raypos) {
-    float singularityDist = length(raypos);
-    float warpFactor = 1.0 / (pow(singularityDist, 2.0) + 0.000001);
-    vec3 singularityVector = normalize(-raypos);
-    eyevec = normalize(eyevec + singularityVector * warpFactor * 5.0 / float(ITERATIONS));
+    float warpFactor=1.0/(pow(length(raypos),2.0)+0.000001);
+    eyevec=normalize(eyevec+normalize(-raypos)*warpFactor*5.0/float(ITERATIONS));
 }
-
 void RotateCamera(inout vec3 eyevec, inout vec3 eyepos) {
-    float mousePosY = iMouse.y / iResolution.y;
-    float mousePosX = iMouse.x / iResolution.x;
-    vec3 angle = vec3(mousePosY * 0.05 + 0.05, 1.0 + mousePosX * 1.0, -0.45);
-    eyevec = rotate(eyevec, angle.x, angle.y, angle.z);
-    eyepos = rotate(eyepos, angle.x, angle.y, angle.z);
+    vec3 angle=vec3(iMouse.y/iResolution.y*0.05+0.05,1.0+iMouse.x/iResolution.x*1.0,-0.45);
+    eyevec=rotate(eyevec,angle.x,angle.y,angle.z); eyepos=rotate(eyepos,angle.x,angle.y,angle.z);
 }
-
 void main() {
-    vec2 uv = gl_FragCoord.xy / iResolution.xy;
-    float aspect = iResolution.x / iResolution.y;
-    vec2 uveye = uv;
+    vec2 uv=gl_FragCoord.xy/iResolution.xy; float aspect=iResolution.x/iResolution.y; vec2 uveye=uv;
 #ifdef TEMPORAL_AA
-    uveye.x += (rand(uv + sin(iTime)) / iResolution.x) * (iMouse.z > 1.0 ? 0.0 : 1.0);
-    uveye.y += (rand(uv + 1.0 + sin(iTime)) / iResolution.y) * (iMouse.z > 1.0 ? 0.0 : 1.0);
+    uveye.x+=(rand(uv+sin(iTime))/iResolution.x)*(iMouse.z>1.0?0.0:1.0);
+    uveye.y+=(rand(uv+1.0+sin(iTime))/iResolution.y)*(iMouse.z>1.0?0.0:1.0);
 #endif
-    vec3 eyevec = normalize(vec3((uveye * 2.0 - 1.0) * vec2(aspect, 1.0), 6.0));
-    vec3 eyepos = vec3(0.0, 0.0, -10.0);
-    vec2 mousepos = iMouse.xy / iResolution.xy;
-    if (mousepos.x == 0.0) mousepos.x = 0.35;
-    eyepos.x += mousepos.x * 3.0 - 1.5;
-    const float far = 15.0;
-    RotateCamera(eyevec, eyepos);
-
-    vec3 color = vec3(0.0); float alpha = 0.0;
-    float dither = rand(uv
+    vec3 eyevec=normalize(vec3((uveye*2.0-1.0)*vec2(aspect,1.0),6.0));
+    vec3 eyepos=vec3(0.0,0.0,-10.0);
+    vec2 mousepos=iMouse.xy/iResolution.xy; if(mousepos.x==0.0) mousepos.x=0.35;
+    eyepos.x+=mousepos.x*3.0-1.5;
+    RotateCamera(eyevec,eyepos);
+    vec3 color=vec3(0.0); float alpha=0.0;
+    float dither=rand(uv
 #ifdef TEMPORAL_AA
-        + sin(iTime) * (iMouse.z > 1.0 ? 0.0 : 1.0)
+    +sin(iTime)*(iMouse.z>1.0?0.0:1.0)
 #endif
-    ) * 2.0;
-
-    vec3 raypos = eyepos + eyevec * dither * far / float(ITERATIONS);
-    for (int i = 0; i < ITERATIONS; i++) {
-        WarpSpace(eyevec, raypos);
-        raypos += eyevec * far / float(ITERATIONS);
-        if (length(raypos) < 1.0) break;
-        GasDisc(color, alpha, raypos);
-        Haze(color, raypos, alpha);
+    )*2.0;
+    vec3 raypos=eyepos+eyevec*dither*15.0/float(ITERATIONS);
+    for(int i=0;i<ITERATIONS;i++){
+        WarpSpace(eyevec,raypos); raypos+=eyevec*15.0/float(ITERATIONS);
+        if(length(raypos)<1.0) break;
+        GasDisc(color,alpha,raypos); Haze(color,raypos,alpha);
     }
-    color *= 0.0001;
+    color*=0.0001;
 #ifdef TEMPORAL_AA
-    const float p = 1.0;
-    vec3 previous = pow(texture(iChannel2, uv).rgb, vec3(1.0/p));
-    color = pow(color, vec3(1.0/p));
-    float blendWeight = 0.9 * (iMouse.z > 1.0 ? 0.0 : 1.0);
-    color = mix(color, previous, blendWeight);
-    color = pow(color, vec3(p));
+    vec3 previous=pow(texture(iChannel2,uv).rgb,vec3(1.0));
+    color=pow(color,vec3(1.0)); float blendWeight=0.9*(iMouse.z>1.0?0.0:1.0);
+    color=mix(color,previous,blendWeight); color=pow(color,vec3(1.0));
 #endif
-    fragColor = vec4(saturate(color), 1.0);
+    fragColor=vec4(saturate(color),1.0);
 }`;
 
 const FS_B = `#version 300 es
-precision highp float;
-out vec4 fragColor;
-${UNI}
-vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-vec3 Grab1(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave); coord += offset; coord *= scale;
-    if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    return ColorFetch(coord);
-}
-vec3 Grab4(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave); coord += offset; coord *= scale;
-    if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0; const int os = 4;
-    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
-    return color/weights;
-}
-vec3 Grab8(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave); coord += offset; coord *= scale;
-    if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0; const int os = 8;
-    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
-    return color/weights;
-}
-vec3 Grab16(vec2 coord, const float octave, const vec2 offset) {
-    float scale = exp2(octave); coord += offset; coord *= scale;
-    if (coord.x < 0.0 || coord.x > 1.0 || coord.y < 0.0 || coord.y > 1.0) return vec3(0.0);
-    vec3 color = vec3(0.0); float weights = 0.0; const int os = 16;
-    for (int i=0;i<os;i++) for (int j=0;j<os;j++) { vec2 off=(vec2(i,j)/iResolution.xy)*scale/float(os); color+=ColorFetch(coord+off); weights+=1.0; }
-    return color/weights;
-}
-vec2 CalcOffset(float octave) {
-    vec2 padding = vec2(10.0) / iResolution.xy; vec2 offset = vec2(0.0);
-    offset.x = -min(1.0, floor(octave/3.0)) * (0.25 + padding.x);
-    offset.y = -(1.0-(1.0/exp2(octave))) - padding.y*octave;
-    offset.y += min(1.0, floor(octave/3.0)) * 0.35;
-    return offset;
-}
-void main() {
-    vec2 uv = gl_FragCoord.xy / iResolution.xy; vec3 color = vec3(0.0);
-    color += Grab1 (uv,1.0,CalcOffset(0.0)); color += Grab4 (uv,2.0,CalcOffset(1.0));
-    color += Grab8 (uv,3.0,CalcOffset(2.0)); color += Grab16(uv,4.0,CalcOffset(3.0));
-    color += Grab16(uv,5.0,CalcOffset(4.0)); color += Grab16(uv,6.0,CalcOffset(5.0));
-    color += Grab16(uv,7.0,CalcOffset(6.0)); color += Grab16(uv,8.0,CalcOffset(7.0));
-    fragColor = vec4(color,1.0);
-}`;
+precision highp float; out vec4 fragColor; ${UNI}
+vec3 CF(vec2 c){return texture(iChannel0,c).rgb;}
+vec3 G1(vec2 c,float o,vec2 off){float s=exp2(o);c+=off;c*=s;if(c.x<0.||c.x>1.||c.y<0.||c.y>1.)return vec3(0.);return CF(c);}
+vec3 G4(vec2 c,float o,vec2 off){float s=exp2(o);c+=off;c*=s;if(c.x<0.||c.x>1.||c.y<0.||c.y>1.)return vec3(0.);vec3 col=vec3(0.);float w=0.;for(int i=0;i<4;i++)for(int j=0;j<4;j++){vec2 d=(vec2(i,j)/iResolution.xy)*s/4.;col+=CF(c+d);w+=1.;}return col/w;}
+vec3 G8(vec2 c,float o,vec2 off){float s=exp2(o);c+=off;c*=s;if(c.x<0.||c.x>1.||c.y<0.||c.y>1.)return vec3(0.);vec3 col=vec3(0.);float w=0.;for(int i=0;i<8;i++)for(int j=0;j<8;j++){vec2 d=(vec2(i,j)/iResolution.xy)*s/8.;col+=CF(c+d);w+=1.;}return col/w;}
+vec3 G16(vec2 c,float o,vec2 off){float s=exp2(o);c+=off;c*=s;if(c.x<0.||c.x>1.||c.y<0.||c.y>1.)return vec3(0.);vec3 col=vec3(0.);float w=0.;for(int i=0;i<16;i++)for(int j=0;j<16;j++){vec2 d=(vec2(i,j)/iResolution.xy)*s/16.;col+=CF(c+d);w+=1.;}return col/w;}
+vec2 CO(float o){vec2 pad=vec2(10.)/iResolution.xy,off=vec2(0.);off.x=-min(1.,floor(o/3.))*(0.25+pad.x);off.y=-(1.-(1./exp2(o)))-pad.y*o;off.y+=min(1.,floor(o/3.))*0.35;return off;}
+void main(){vec2 uv=gl_FragCoord.xy/iResolution.xy;vec3 c=vec3(0.);c+=G1(uv,1.,CO(0.));c+=G4(uv,2.,CO(1.));c+=G8(uv,3.,CO(2.));c+=G16(uv,4.,CO(3.));c+=G16(uv,5.,CO(4.));c+=G16(uv,6.,CO(5.));c+=G16(uv,7.,CO(6.));c+=G16(uv,8.,CO(7.));fragColor=vec4(c,1.);}`;
 
 const FS_C = `#version 300 es
-precision highp float;
-out vec4 fragColor;
-${UNI}
-vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-void main() {
-    float weights[5]; float offsets[5];
-    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139; weights[3]=0.01037598; weights[4]=0.00025940;
-    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765; offsets[3]=5.17647059; offsets[4]=7.05882353;
-    vec2 uv = gl_FragCoord.xy / iResolution.xy;
-    vec3 color = vec3(0.0); float weightSum = 0.0;
-    if (uv.x < 0.52) {
-        color += ColorFetch(uv) * weights[0]; weightSum += weights[0];
-        for (int i=1;i<5;i++) { vec2 off=vec2(offsets[i])/iResolution.xy; color+=ColorFetch(uv+off*vec2(0.5,0.0))*weights[i]; color+=ColorFetch(uv-off*vec2(0.5,0.0))*weights[i]; weightSum+=weights[i]*2.0; }
-        color /= weightSum;
-    }
-    fragColor = vec4(color,1.0);
-}`;
+precision highp float; out vec4 fragColor; ${UNI}
+void main(){
+    float w[5];float o[5];w[0]=.19638;w[1]=.29675;w[2]=.09442;w[3]=.01038;w[4]=.00026;o[0]=0.;o[1]=1.41176;o[2]=3.29412;o[3]=5.17647;o[4]=7.05882;
+    vec2 uv=gl_FragCoord.xy/iResolution.xy;vec3 c=vec3(0.);float ws=0.;
+    if(uv.x<.52){c+=texture(iChannel0,uv).rgb*w[0];ws+=w[0];for(int i=1;i<5;i++){vec2 d=vec2(o[i])/iResolution.xy;c+=texture(iChannel0,uv+d*vec2(.5,0.)).rgb*w[i];c+=texture(iChannel0,uv-d*vec2(.5,0.)).rgb*w[i];ws+=w[i]*2.;}c/=ws;}
+    fragColor=vec4(c,1.);}`;
 
 const FS_D = `#version 300 es
-precision highp float;
-out vec4 fragColor;
-${UNI}
-vec3 ColorFetch(vec2 coord) { return texture(iChannel0, coord).rgb; }
-void main() {
-    float weights[5]; float offsets[5];
-    weights[0]=0.19638062; weights[1]=0.29675293; weights[2]=0.09442139; weights[3]=0.01037598; weights[4]=0.00025940;
-    offsets[0]=0.0; offsets[1]=1.41176471; offsets[2]=3.29411765; offsets[3]=5.17647059; offsets[4]=7.05882353;
-    vec2 uv = gl_FragCoord.xy / iResolution.xy;
-    vec3 color = vec3(0.0); float weightSum = 0.0;
-    if (uv.x < 0.52) {
-        color += ColorFetch(uv) * weights[0]; weightSum += weights[0];
-        for (int i=1;i<5;i++) { vec2 off=vec2(offsets[i])/iResolution.xy; color+=ColorFetch(uv+off*vec2(0.0,0.5))*weights[i]; color+=ColorFetch(uv-off*vec2(0.0,0.5))*weights[i]; weightSum+=weights[i]*2.0; }
-        color /= weightSum;
-    }
-    fragColor = vec4(color,1.0);
-}`;
+precision highp float; out vec4 fragColor; ${UNI}
+void main(){
+    float w[5];float o[5];w[0]=.19638;w[1]=.29675;w[2]=.09442;w[3]=.01038;w[4]=.00026;o[0]=0.;o[1]=1.41176;o[2]=3.29412;o[3]=5.17647;o[4]=7.05882;
+    vec2 uv=gl_FragCoord.xy/iResolution.xy;vec3 c=vec3(0.);float ws=0.;
+    if(uv.x<.52){c+=texture(iChannel0,uv).rgb*w[0];ws+=w[0];for(int i=1;i<5;i++){vec2 d=vec2(o[i])/iResolution.xy;c+=texture(iChannel0,uv+d*vec2(0.,.5)).rgb*w[i];c+=texture(iChannel0,uv-d*vec2(0.,.5)).rgb*w[i];ws+=w[i]*2.;}c/=ws;}
+    fragColor=vec4(c,1.);}`;
 
 const FS_IMG = `#version 300 es
-precision highp float;
-out vec4 fragColor;
-${UNI}
-float saturate(float x) { return clamp(x,0.0,1.0); }
-vec3 saturate(vec3 x) { return clamp(x,vec3(0.0),vec3(1.0)); }
-vec3 ColorFetch(vec2 coord) { return texture(iChannel0,coord).rgb; }
-vec3 BloomFetch(vec2 coord) { return texture(iChannel1,coord).rgb; }
-vec2 CalcOffset(float octave) {
-    vec2 padding=vec2(10.0)/iResolution.xy; vec2 offset=vec2(0.0);
-    offset.x=-min(1.0,floor(octave/3.0))*(0.25+padding.x);
-    offset.y=-(1.0-(1.0/exp2(octave)))-padding.y*octave;
-    offset.y+=min(1.0,floor(octave/3.0))*0.35;
-    return offset;
-}
-vec3 Grab(vec2 coord, const float octave, const vec2 offset) {
-    float scale=exp2(octave); coord/=scale; coord-=offset; return BloomFetch(coord);
-}
-vec3 GetBloom(vec2 coord) {
-    vec3 bloom=vec3(0.0);
-    bloom+=Grab(coord,1.0,CalcOffset(0.0))*1.0; bloom+=Grab(coord,2.0,CalcOffset(1.0))*1.5;
-    bloom+=Grab(coord,3.0,CalcOffset(2.0))*1.0; bloom+=Grab(coord,4.0,CalcOffset(3.0))*1.5;
-    bloom+=Grab(coord,5.0,CalcOffset(4.0))*1.8; bloom+=Grab(coord,6.0,CalcOffset(5.0))*1.0;
-    bloom+=Grab(coord,7.0,CalcOffset(6.0))*1.0; bloom+=Grab(coord,8.0,CalcOffset(7.0))*1.0;
-    return bloom;
-}
-void main() {
+precision highp float; out vec4 fragColor; ${UNI}
+float sat(float x){return clamp(x,0.,1.);} vec3 sat(vec3 x){return clamp(x,vec3(0.),vec3(1.));}
+vec2 CO(float o){vec2 pad=vec2(10.)/iResolution.xy,off=vec2(0.);off.x=-min(1.,floor(o/3.))*(0.25+pad.x);off.y=-(1.-(1./exp2(o)))-pad.y*o;off.y+=min(1.,floor(o/3.))*0.35;return off;}
+vec3 GB(vec2 c,float o,vec2 off){float s=exp2(o);c/=s;c-=off;return texture(iChannel1,c).rgb;}
+vec3 bloom(vec2 c){vec3 b=vec3(0.);b+=GB(c,1.,CO(0.))*1.;b+=GB(c,2.,CO(1.))*1.5;b+=GB(c,3.,CO(2.))*1.;b+=GB(c,4.,CO(3.))*1.5;b+=GB(c,5.,CO(4.))*1.8;b+=GB(c,6.,CO(5.))*1.;b+=GB(c,7.,CO(6.))*1.;b+=GB(c,8.,CO(7.))*1.;return b;}
+void main(){
     vec2 uv=gl_FragCoord.xy/iResolution.xy;
-    vec3 color=ColorFetch(uv); color+=GetBloom(uv)*0.08; color*=200.0;
-    color=pow(color,vec3(1.5)); color=color/(1.0+color); color=pow(color,vec3(1.0/1.5));
-    color=mix(color,color*color*(3.0-2.0*color),vec3(1.0));
-    color=pow(color,vec3(1.0,1.05,1.40)); color=saturate(color*1.01); color=pow(color,vec3(0.7/2.2));
-    fragColor=vec4(color,1.0);
-}`;
+    vec3 c=texture(iChannel0,uv).rgb+bloom(uv)*0.08; c*=200.;
+    c=pow(c,vec3(1.5)); c=c/(1.+c); c=pow(c,vec3(1./1.5));
+    c=mix(c,c*c*(3.-2.*c),vec3(1.)); c=pow(c,vec3(1.,1.05,1.4)); c=sat(c*1.01); c=pow(c,vec3(.7/2.2));
+    fragColor=vec4(c,1.);}`;
 
-function mkShader(type, src) {
-  const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error('Shader error:', gl.getShaderInfoLog(s)); return null; }
-  return s;
-}
-function mkProgram(fsSrc) {
-  const vs = mkShader(gl.VERTEX_SHADER, VS); const fs = mkShader(gl.FRAGMENT_SHADER, fsSrc);
-  if (!vs || !fs) return null;
-  const p = gl.createProgram(); gl.attachShader(p, vs); gl.attachShader(p, fs); gl.linkProgram(p);
-  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.error('Link error:', gl.getProgramInfoLog(p)); return null; }
-  return p;
-}
+function mkShader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error('Shader:',gl.getShaderInfoLog(s));return null;}return s;}
+function mkProg(fs){const vs=mkShader(gl.VERTEX_SHADER,VS),f=mkShader(gl.FRAGMENT_SHADER,fs);if(!vs||!f)return null;const p=gl.createProgram();gl.attachShader(p,vs);gl.attachShader(p,f);gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS)){console.error('Link:',gl.getProgramInfoLog(p));return null;}return p;}
 
-const progA=mkProgram(FS_A), progB=mkProgram(FS_B), progC=mkProgram(FS_C), progD=mkProgram(FS_D), progImg=mkProgram(FS_IMG);
-if (!progA||!progB||!progC||!progD||!progImg) return;
+const pA=mkProg(FS_A),pB=mkProg(FS_B),pC=mkProg(FS_C),pD=mkProg(FS_D),pI=mkProg(FS_IMG);
+if(!pA||!pB||!pC||!pD||!pI)return;
 
-const vao=gl.createVertexArray(); gl.bindVertexArray(vao);
-const vbo=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
-for (const p of [progA,progB,progC,progD,progImg]) {
-  gl.useProgram(p); const loc=gl.getAttribLocation(p,'a_pos');
-  if (loc>=0) { gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0); }
-}
+const vao=gl.createVertexArray();gl.bindVertexArray(vao);
+const vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vbo);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+for(const p of[pA,pB,pC,pD,pI]){gl.useProgram(p);const l=gl.getAttribLocation(p,'a_pos');if(l>=0){gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,0,0);}}
 gl.bindVertexArray(null);
 
-function genNoise256(seed) {
-  const data=new Uint8Array(256*256*4); const s=seed|0;
-  for (let y=0;y<256;y++) for (let x=0;x<256;x++) {
-    const i=(y*256+x)*4; let h;
-    h=Math.imul((x^s)^(y*57),0x9e3779b9); h^=h>>>16; h=Math.imul(h,0x85ebca6b); h^=h>>>13; data[i]=h&255;
-    h=Math.imul((x*31+s)^(y*73),0x6c62272e); h^=h>>>16; h=Math.imul(h,0x27d4eb2f); h^=h>>>15; data[i+1]=h&255;
-    h=Math.imul((x^37+s)+(y*101),0x7fb5d329); h^=h>>>16; h=Math.imul(h,0xb55a4f09); h^=h>>>15; data[i+2]=h&255;
-    h=Math.imul((x*17+s)^(y*41+13),0x8da6b343); h^=h>>>16; h=Math.imul(h,0xd8163841); h^=h>>>15; data[i+3]=h&255;
-  }
-  return data;
-}
+function genNoise(seed){const d=new Uint8Array(256*256*4),s=seed|0;for(let y=0;y<256;y++)for(let x=0;x<256;x++){const i=(y*256+x)*4;let h;h=Math.imul((x^s)^(y*57),0x9e3779b9);h^=h>>>16;h=Math.imul(h,0x85ebca6b);h^=h>>>13;d[i]=h&255;h=Math.imul((x*31+s)^(y*73),0x6c62272e);h^=h>>>16;h=Math.imul(h,0x27d4eb2f);h^=h>>>15;d[i+1]=h&255;h=Math.imul((x^37+s)+(y*101),0x7fb5d329);h^=h>>>16;h=Math.imul(h,0xb55a4f09);h^=h>>>15;d[i+2]=h&255;h=Math.imul((x*17+s)^(y*41+13),0x8da6b343);h^=h>>>16;h=Math.imul(h,0xd8163841);h^=h>>>15;d[i+3]=h&255;}return d;}
 
-function mkTex(data,w,h,wrap) {
-  const t=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
-  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,wrap);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,wrap);
-  gl.generateMipmap(gl.TEXTURE_2D); return t;
-}
+function mkTex(d,w,h,wr){const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,d);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,wr);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,wr);gl.generateMipmap(gl.TEXTURE_2D);return t;}
+const n0=mkTex(genNoise(0),256,256,gl.REPEAT),n1=mkTex(genNoise(1),256,256,gl.REPEAT);
 
-const noiseTex=mkTex(genNoise256(0),256,256,gl.REPEAT);
-const noiseTex2=mkTex(genNoise256(1),256,256,gl.REPEAT);
+function mkFBO(w,h){const tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA16F,w,h,0,gl.RGBA,gl.HALF_FLOAT,null);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);const fbo=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);gl.bindFramebuffer(gl.FRAMEBUFFER,null);return{fbo,tex};}
 
-function mkFBO(w,h) {
-  const tex=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,tex);
-  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA16F,w,h,0,gl.RGBA,gl.HALF_FLOAT,null);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-  const fbo=gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);
-  gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
-  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
-  return {fbo,tex,w,h};
-}
+let W=0,H=0,A0,A1,B,C,D;
+function rebuild(w,h){[A0,A1,B,C,D].forEach(f=>{if(f){gl.deleteTexture(f.tex);gl.deleteFramebuffer(f.fbo);}});A0=mkFBO(w,h);A1=mkFBO(w,h);B=mkFBO(w,h);C=mkFBO(w,h);D=mkFBO(w,h);W=w;H=h;}
 
-let W=0,H=0,fboA0,fboA1,fboB,fboC,fboD;
+function uLoc(p){gl.useProgram(p);return{r:gl.getUniformLocation(p,'iResolution'),t:gl.getUniformLocation(p,'iTime'),f:gl.getUniformLocation(p,'iFrame'),m:gl.getUniformLocation(p,'iMouse'),c0:gl.getUniformLocation(p,'iChannel0'),c1:gl.getUniformLocation(p,'iChannel1'),c2:gl.getUniformLocation(p,'iChannel2')};}
+const uA=uLoc(pA),uB=uLoc(pB),uC=uLoc(pC),uD=uLoc(pD),uI=uLoc(pI);
 
-function rebuildFBOs(w,h) {
-  [fboA0,fboA1,fboB,fboC,fboD].forEach(f=>{if(f){gl.deleteTexture(f.tex);gl.deleteFramebuffer(f.fbo);}});
-  fboA0=mkFBO(w,h); fboA1=mkFBO(w,h); fboB=mkFBO(w,h); fboC=mkFBO(w,h); fboD=mkFBO(w,h);
-  W=w; H=h;
-}
+function su(p,u,w,h,t,fr,mo){gl.useProgram(p);gl.uniform3f(u.r,w,h,1);gl.uniform1f(u.t,t);gl.uniform1i(u.f,fr);gl.uniform4fv(u.m,mo);}
+function bt(u,unit,name,tex){gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,tex);gl.uniform1i(u[name],unit);}
 
-function cacheUniforms(prog) {
-  gl.useProgram(prog);
-  return { iResolution:gl.getUniformLocation(prog,'iResolution'), iTime:gl.getUniformLocation(prog,'iTime'),
-           iFrame:gl.getUniformLocation(prog,'iFrame'), iMouse:gl.getUniformLocation(prog,'iMouse'),
-           iChannel0:gl.getUniformLocation(prog,'iChannel0'), iChannel1:gl.getUniformLocation(prog,'iChannel1'),
-           iChannel2:gl.getUniformLocation(prog,'iChannel2'), iChannel3:gl.getUniformLocation(prog,'iChannel3') };
-}
-const uA=cacheUniforms(progA),uB=cacheUniforms(progB),uC=cacheUniforms(progC),uD=cacheUniforms(progD),uImg=cacheUniforms(progImg);
-
-function setUniforms(prog,u,w,h,t,frame,mouse) {
-  gl.useProgram(prog); gl.uniform3f(u.iResolution,w,h,1.0); gl.uniform1f(u.iTime,t);
-  gl.uniform1i(u.iFrame,frame); gl.uniform4fv(u.iMouse,mouse);
-}
-function bindTex(u,unit,name,tex) {
-  gl.activeTexture(gl.TEXTURE0+unit); gl.bindTexture(gl.TEXTURE_2D,tex); gl.uniform1i(u[name],unit);
-}
-
-function resize() {
-  const dpr=Math.min(window.devicePixelRatio||1,1.25);
-  const w=Math.round(canvas.offsetWidth*dpr), h=Math.round(canvas.offsetHeight*dpr);
-  if (w===W&&h===H) return;
-  canvas.width=w; canvas.height=h; rebuildFBOs(w,h);
-}
+function resize(){const dpr=Math.min(window.devicePixelRatio||1,1.25),w=Math.round(canvas.offsetWidth*dpr),h=Math.round(canvas.offsetHeight*dpr);if(w===W&&h===H)return;canvas.width=w;canvas.height=h;rebuild(w,h);}
 window.addEventListener('resize',resize,{passive:true});
 resize();
 
-let mouse=[0,0,0,0];
-canvas.addEventListener('mousemove',e=>{
-  const r=canvas.getBoundingClientRect(), dpr=canvas.width/r.width;
-  mouse[0]=(e.clientX-r.left)*dpr; mouse[1]=H-(e.clientY-r.top)*dpr;
-  if(e.buttons){mouse[2]=mouse[0];mouse[3]=mouse[1];}
-});
-canvas.addEventListener('mousedown',()=>{mouse[2]=mouse[0];mouse[3]=mouse[1];});
-canvas.addEventListener('mouseup',()=>{mouse[2]=0;mouse[3]=0;});
+let mo=[0,0,0,0];
+canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect(),dpr=canvas.width/r.width;mo[0]=(e.clientX-r.left)*dpr;mo[1]=H-(e.clientY-r.top)*dpr;if(e.buttons){mo[2]=mo[0];mo[3]=mo[1];}});
+canvas.addEventListener('mousedown',()=>{mo[2]=mo[0];mo[3]=mo[1];});
+canvas.addEventListener('mouseup',()=>{mo[2]=0;mo[3]=0;});
 
-let frameN=0, pingPong=false;
+let fn=0,pp=false;
+function draw(){gl.bindVertexArray(vao);gl.drawArrays(gl.TRIANGLES,0,6);gl.bindVertexArray(null);}
 
-function draw() { gl.bindVertexArray(vao); gl.drawArrays(gl.TRIANGLES,0,6); gl.bindVertexArray(null); }
+function render(ts){
+  if(!reduced)requestAnimationFrame(render);
+  const t=ts*.001;resize();
+  const AC=pp?A1:A0,AP=pp?A0:A1;
 
-function render(ts) {
-  const t=ts*0.001;
-  resize();
-  const fboACurr=pingPong?fboA1:fboA0, fboAPrev=pingPong?fboA0:fboA1;
+  gl.bindFramebuffer(gl.FRAMEBUFFER,AC.fbo);gl.viewport(0,0,W,H);su(pA,uA,W,H,t,fn,mo);bt(uA,0,'c0',n0);bt(uA,1,'c1',n1);bt(uA,2,'c2',AP.tex);draw();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,B.fbo);gl.viewport(0,0,W,H);su(pB,uB,W,H,t,fn,mo);bt(uB,0,'c0',AC.tex);draw();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,C.fbo);gl.viewport(0,0,W,H);su(pC,uC,W,H,t,fn,mo);bt(uC,0,'c0',B.tex);draw();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,D.fbo);gl.viewport(0,0,W,H);su(pD,uD,W,H,t,fn,mo);bt(uD,0,'c0',C.tex);draw();
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,W,H);su(pI,uI,W,H,t,fn,mo);bt(uI,0,'c0',AC.tex);bt(uI,1,'c1',D.tex);draw();
 
-  gl.bindFramebuffer(gl.FRAMEBUFFER,fboACurr.fbo); gl.viewport(0,0,W,H);
-  setUniforms(progA,uA,W,H,t,frameN,mouse);
-  bindTex(uA,0,'iChannel0',noiseTex); bindTex(uA,1,'iChannel1',noiseTex2); bindTex(uA,2,'iChannel2',fboAPrev.tex);
-  draw();
-
-  gl.bindFramebuffer(gl.FRAMEBUFFER,fboB.fbo); gl.viewport(0,0,W,H);
-  setUniforms(progB,uB,W,H,t,frameN,mouse); bindTex(uB,0,'iChannel0',fboACurr.tex); draw();
-
-  gl.bindFramebuffer(gl.FRAMEBUFFER,fboC.fbo); gl.viewport(0,0,W,H);
-  setUniforms(progC,uC,W,H,t,frameN,mouse); bindTex(uC,0,'iChannel0',fboB.tex); draw();
-
-  gl.bindFramebuffer(gl.FRAMEBUFFER,fboD.fbo); gl.viewport(0,0,W,H);
-  setUniforms(progD,uD,W,H,t,frameN,mouse); bindTex(uD,0,'iChannel0',fboC.tex); draw();
-
-  gl.bindFramebuffer(gl.FRAMEBUFFER,null); gl.viewport(0,0,W,H);
-  setUniforms(progImg,uImg,W,H,t,frameN,mouse);
-  bindTex(uImg,0,'iChannel0',fboACurr.tex); bindTex(uImg,1,'iChannel1',fboD.tex); draw();
-
-  pingPong=!pingPong; frameN++;
-  if(!reduced) requestAnimationFrame(render);
+  pp=!pp;fn++;
 }
 
-reduced ? render(0) : requestAnimationFrame(render);
+reduced?render(0):requestAnimationFrame(render);
 
 const hero=canvas.closest('.hero');
 window.addEventListener('scroll',()=>{
-  const scrollY=window.scrollY, heroH=hero?hero.offsetHeight:window.innerHeight;
-  if(scrollY<heroH) canvas.style.transform=`translateY(${scrollY*0.45}px)`;
+  const sy=window.scrollY,hh=hero?hero.offsetHeight:window.innerHeight;
+  if(sy<hh)canvas.style.transform=`translateY(${sy*.45}px)`;
 },{passive:true});
 
 })();
