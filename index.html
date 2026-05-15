@@ -13,19 +13,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #080c0f;
-      --surface:    #0e1419;
-      --border:     #1a2530;
+      --bg:         #060a0d;
+      --surface:    #0d1318;
+      --border:     #162030;
       --accent:     #2dd4bf;
       --accent-alt: #38bdf8;
       --text:       #e2e8f0;
       --text-sec:   #64748b;
-      --text-muted: #334155;
+      --text-muted: #2d3f50;
     }
 
     html { scroll-behavior: smooth; }
@@ -38,315 +37,301 @@
       overflow-x: hidden;
     }
 
-    /* ── Hero ──────────────────────────────────────────────── */
+    /* ── HERO ─────────────────────────────────────── */
 
     .hero {
       position: relative;
-      height: 100vh;
-      min-height: 520px;
+      height: 100svh;
+      min-height: 540px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      background: var(--bg);
     }
 
-    #bh-canvas {
+    #bh {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      display: block;
     }
 
-    /* ── Nav ───────────────────────────────────────────────── */
+    /* vignette to blend canvas edges */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 50%, transparent 30%, var(--bg) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-    .hero-nav {
+    /* ── NAV ──────────────────────────────────────── */
+
+    nav {
       position: relative;
       z-index: 10;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 5vw, 3rem);
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 6vw, 3.5rem);
     }
 
     .monogram {
       font-family: 'DM Mono', monospace;
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-size: 1.1rem;
       font-weight: 500;
       color: var(--accent);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
 
     .nav-links {
       display: flex;
-      gap: clamp(0.75rem, 2vw, 1.25rem);
+      gap: clamp(0.75rem, 2.5vw, 1.5rem);
       align-items: center;
     }
 
     .nav-links a {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-sec);
       text-decoration: none;
       transition: color 0.2s;
+      letter-spacing: 0.03em;
     }
 
     .nav-links a:hover { color: var(--accent); }
+    .nav-links svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-    .nav-links svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
+    /* ── HERO CENTER ──────────────────────────────── */
 
-    /* ── Hero center ───────────────────────────────────────── */
-
-    .hero-center {
+    .hero-body {
       position: relative;
       z-index: 10;
       flex: 1;
-      display: grid;
-      place-items: center;
-      padding: clamp(1rem, 4vw, 2rem) clamp(1.5rem, 5vw, 3rem);
-    }
-
-    .hero-content {
       display: flex;
       align-items: center;
-      gap: clamp(1.5rem, 4vw, 2.5rem);
+      justify-content: center;
+      padding: 0 clamp(1.5rem, 6vw, 3.5rem);
     }
 
-    /* ── Avatar ────────────────────────────────────────────── */
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.5rem, 4vw, 2.75rem);
+    }
 
-    .avatar-wrap {
+    /* ── AVATAR ───────────────────────────────────── */
+
+    /*
+      PHOTO TIPS — avatar.jpg
+      ─────────────────────────────────────────────────
+      · Encuadre desde hombros, fondo neutro oscuro o exterior
+      · Ligeramente de perfil (3/4), ambos ojos visibles
+      · Luz natural lateral, no flash frontal
+      · Ropa lisa sin logos · expresión neutral o leve sonrisa
+      · Mínimo 400×400 px cuadrada, formato JPG
+      · Misma foto válida para GitHub profile picture
+      Guarda el archivo como avatar.jpg en la raíz del repo.
+      ─────────────────────────────────────────────────
+    */
+    .avatar {
       flex-shrink: 0;
-      position: relative;
-      width: 96px;
-      height: 96px;
+      width: clamp(80px, 10vw, 104px);
+      height: clamp(80px, 10vw, 104px);
       border-radius: 50%;
-      border: 2px solid var(--accent);
-      overflow: hidden;
+      border: 1.5px solid var(--accent);
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 0 0 4px rgba(45,212,191,0.08), 0 0 28px rgba(45,212,191,0.12);
+    }
+
+    .avatar-ph {
+      flex-shrink: 0;
+      width: clamp(80px, 10vw, 104px);
+      height: clamp(80px, 10vw, 104px);
+      border-radius: 50%;
+      border: 1.5px dashed var(--text-muted);
       background: var(--surface);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
-    }
-
-    .avatar-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-
-    .avatar-placeholder {
       font-family: 'DM Mono', monospace;
-      font-size: 0.57rem;
+      font-size: 0.6rem;
       color: var(--text-muted);
       text-align: center;
       line-height: 1.5;
-      padding: 0 0.4rem;
-      pointer-events: none;
-      user-select: none;
     }
 
-    /* ── Hero text ─────────────────────────────────────────── */
-
-    .hero-name {
+    .hero-text h1 {
       font-family: 'DM Mono', monospace;
-      font-size: clamp(2rem, 5.5vw, 3.25rem);
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
       font-weight: 500;
       color: var(--text);
       line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-role {
-      font-size: clamp(0.875rem, 2vw, 1.05rem);
-      color: var(--text-sec);
       margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
     }
 
-    .hero-location {
+    .hero-text .role {
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      color: var(--text-sec);
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-text .loc {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
-    /* ── Scroll cue ────────────────────────────────────────── */
+    /* ── SCROLL CUE ───────────────────────────────── */
 
     .scroll-cue {
       position: absolute;
-      bottom: 2rem;
+      bottom: 1.75rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
       color: var(--text-muted);
-      animation: scrollBounce 2.5s ease-in-out infinite;
+      animation: bob 2.8s ease-in-out infinite;
     }
 
-    .scroll-cue svg { display: block; }
-
-    @keyframes scrollBounce {
-      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
-      50%       { opacity: 0.65; transform: translateX(-50%) translateY(5px); }
+    @keyframes bob {
+      0%,100% { opacity:.25; transform:translateX(-50%) translateY(0); }
+      50%      { opacity:.6;  transform:translateX(-50%) translateY(5px); }
     }
 
-    /* ── Main content ──────────────────────────────────────── */
+    /* ── MAIN ─────────────────────────────────────── */
 
-    .main-content {
-      max-width: 720px;
+    main {
+      max-width: 740px;
       margin: 0 auto;
-      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2rem) clamp(3rem, 8vw, 5rem);
+      padding: clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,2rem) clamp(3rem,8vw,5rem);
     }
 
     hr {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 2.5rem 0;
+      margin: 2.25rem 0;
     }
 
-    .section-label {
+    .label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       margin-bottom: 1.25rem;
     }
 
-    /* ── About ─────────────────────────────────────────────── */
+    /* ── ABOUT ────────────────────────────────────── */
 
-    .about-text {
+    .about p {
       color: var(--text-sec);
-      font-size: 0.975rem;
-      line-height: 1.85;
+      font-size: 0.96rem;
+      line-height: 1.9;
     }
 
-    /* ── Projects ──────────────────────────────────────────── */
+    /* ── PROJECTS ─────────────────────────────────── */
 
     .project-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     .card {
       background: var(--surface);
       border-left: 2px solid var(--accent);
-      border-radius: 6px;
-      padding: 0.9rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      padding: 0.85rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, transform 0.18s, box-shadow 0.18s;
     }
 
     .card:hover {
       border-color: var(--accent-alt);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(45, 212, 191, 0.08);
+      transform: translateX(3px);
+      box-shadow: -3px 0 0 0 var(--accent-alt), 6px 0 20px rgba(56,189,248,0.06);
     }
 
     .card-name {
       font-family: 'DM Mono', monospace;
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 500;
       color: var(--text);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.18rem;
     }
 
     .card-stack {
       font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
       line-height: 1.4;
     }
 
     .card-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.85rem;
       flex-shrink: 0;
     }
 
     .card-links a {
       font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent);
       text-decoration: none;
       white-space: nowrap;
       transition: color 0.15s;
     }
 
-    .card-links a:hover {
-      color: var(--accent-alt);
-      text-decoration: underline;
-    }
+    .card-links a:hover { color: var(--accent-alt); text-decoration: underline; }
 
-    /* ── Footer ────────────────────────────────────────────── */
+    /* ── FOOTER ───────────────────────────────────── */
 
     footer {
       text-align: center;
-      padding-top: 1rem;
+      padding-top: 0.5rem;
     }
 
     footer p {
       font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      line-height: 1.9;
+      line-height: 2;
     }
 
-    /* ── Section animations ────────────────────────────────── */
+    /* ── SECTION ANIMS ────────────────────────────── */
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    .about    { animation: fadeUp 0.5s ease both; animation-delay: 0.05s; }
-    .projects { animation: fadeUp 0.5s ease both; animation-delay: 0.15s; }
-    footer    { animation: fadeUp 0.5s ease both; animation-delay: 0.25s; }
+    .about   { animation: fadeUp 0.5s ease both 0.05s; }
+    .projects{ animation: fadeUp 0.5s ease both 0.15s; }
+    footer   { animation: fadeUp 0.5s ease both 0.25s; }
 
-    /* ── Mobile ────────────────────────────────────────────── */
+    /* ── MOBILE ───────────────────────────────────── */
 
-    @media (max-width: 520px) {
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.25rem;
-      }
-
-      .nav-label { display: none; }
-
-      .nav-links a {
-        padding: 0.3rem;
-        font-size: 0;        /* hide any text not wrapped in .nav-label */
-      }
-
-      .nav-links svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
-      }
+    @media (max-width: 500px) {
+      .hero-inner { flex-direction: column; text-align: center; gap: 1.2rem; }
+      .nav-label  { display: none; }
+      .card       { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
@@ -354,277 +339,379 @@
 </head>
 <body>
 
-  <!-- ── HERO ──────────────────────────────────────────────── -->
-  <header class="hero">
-    <canvas id="bh-canvas" aria-hidden="true"></canvas>
+<header class="hero">
+  <canvas id="bh" aria-hidden="true"></canvas>
 
-    <nav class="hero-nav" aria-label="Site navigation">
-      <span class="monogram">DS</span>
-      <div class="nav-links">
-        <a href="https://github.com/DavidSerret" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          <span class="nav-label">GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/davidmcserret/" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          <span class="nav-label">LinkedIn</span>
-        </a>
-        <a href="mailto:david.mcs253@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-          <span class="nav-label">Email</span>
-        </a>
+  <nav aria-label="Site navigation">
+    <span class="monogram">DS</span>
+    <div class="nav-links">
+      <a href="https://github.com/DavidSerret" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="nav-label">GitHub</span>
+      </a>
+      <a href="https://www.linkedin.com/in/davidmcserret/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span class="nav-label">LinkedIn</span>
+      </a>
+      <a href="mailto:damat24@student.sdu.dk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span class="nav-label">Email</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="hero-body">
+    <div class="hero-inner">
+      <img src="avatar.jpg" alt="David Serret" class="avatar"
+           onerror="this.outerHTML='<div class=\'avatar-ph\'>avatar<br>.jpg</div>'">
+      <div class="hero-text">
+        <h1>David Serret</h1>
+        <p class="role">Software Engineering Student</p>
+        <p class="loc">SDU Sønderborg · Physics @ UNED</p>
       </div>
-    </nav>
+    </div>
+  </div>
 
-    <div class="hero-center">
-      <div class="hero-content">
+  <div class="scroll-cue" aria-hidden="true">
+    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+      <line x1="8" y1="1" x2="8" y2="13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="3,9 8,14 13,9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</header>
 
-        <!-- PHOTO TIPS
-             Foto de perfil profesional para el portfolio y GitHub:
-             · Fondo neutro oscuro o al aire libre (sin elementos distractores)
-             · Encuadre desde los hombros hacia arriba
-             · Luz natural lateral — ventana a un lado, no detrás
-             · Expresión neutral o leve sonrisa, mirada a cámara
-             · Ropa lisa sin logos ni estampados llamativos
-             · Resolución mínima 400×400 px, cuadrada, formato JPG
-             · Esta misma foto sirve como GitHub profile picture
-             Guarda el archivo como avatar.jpg en la raíz del repo.
-        -->
-        <div class="avatar-wrap">
-          <img
-            src="avatar.jpg"
-            alt="David Serret"
-            class="avatar-img"
-            id="av-img"
-            onload="this.style.display='block'; document.getElementById('av-ph').style.display='none';"
-          >
-          <div class="avatar-placeholder" id="av-ph">avatar<br>.jpg</div>
-        </div>
+<main>
+  <section class="about">
+    <p class="label">About</p>
+    <p>Building software at the intersection of engineering and real-world problems. Studying Software Engineering at SDU (Denmark) and Physics at UNED (Spain) simultaneously.</p>
+  </section>
 
+  <hr>
+
+  <section class="projects">
+    <p class="label">Projects</p>
+    <div class="project-list">
+
+      <article class="card">
         <div>
-          <h1 class="hero-name">David Serret</h1>
-          <p class="hero-role">Software Engineering Student</p>
-          <p class="hero-location">SDU Sønderborg · Physics @ UNED</p>
+          <p class="card-name">Routr</p>
+          <p class="card-stack">Next.js · TypeScript · Duffel API · Upstash Redis · Vercel</p>
         </div>
-      </div>
-    </div>
-
-    <div class="scroll-cue" aria-hidden="true">
-      <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-        <line x1="9" y1="1" x2="9" y2="15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-        <polyline points="4,11 9,16 14,11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-  </header>
-
-  <!-- ── MAIN ──────────────────────────────────────────────── -->
-  <main>
-    <div class="main-content">
-
-      <section class="about">
-        <p class="section-label">About</p>
-        <p class="about-text">Building software at the intersection of engineering and real-world problems. Currently studying Software Engineering at SDU (Denmark) and Physics at UNED (Spain) simultaneously.</p>
-      </section>
-
-      <hr>
-
-      <section class="projects">
-        <p class="section-label">Projects</p>
-        <div class="project-list">
-
-          <article class="card">
-            <div>
-              <p class="card-name">Routr</p>
-              <p class="card-stack">Next.js · TypeScript · Duffel API · Upstash Redis · Vercel</p>
-            </div>
-            <div class="card-links">
-              <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
-              <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-name">DialysisX</p>
-              <p class="card-stack">TypeScript · Node.js · React · WebSocket</p>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-name">Strikepool</p>
-              <p class="card-stack">TypeScript · Next.js · Supabase · Tailwind</p>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-name">Happinest</p>
-              <p class="card-stack">Laravel · PHP · MySQL · Blade</p>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-name">DeskUp</p>
-              <p class="card-stack">Laravel · PHP · MQTT · Tailwind</p>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div>
-              <p class="card-name">HPO Analyzer</p>
-              <p class="card-stack">C# · Avalonia · .NET</p>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
-              <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
-            </div>
-          </article>
-
+        <div class="card-links">
+          <a href="https://routr-rosy.vercel.app" target="_blank" rel="noopener noreferrer">Live ↗</a>
+          <a href="https://github.com/DavidSerret/routr" target="_blank" rel="noopener noreferrer">Repo ↗</a>
         </div>
-      </section>
+      </article>
 
-      <hr>
+      <article class="card">
+        <div>
+          <p class="card-name">DialysisX</p>
+          <p class="card-stack">TypeScript · Node.js · React · WebSocket</p>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/DavidSerret/dialysisX" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+        </div>
+      </article>
 
-      <footer>
-        <p>Built by David Serret · 2026</p>
-        <p>davidserret.github.io</p>
-      </footer>
+      <article class="card">
+        <div>
+          <p class="card-name">Strikepool</p>
+          <p class="card-stack">TypeScript · Next.js · Supabase · Tailwind</p>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/DavidSerret/strikepool" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <p class="card-name">Happinest</p>
+          <p class="card-stack">Laravel · PHP · MySQL · Blade</p>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/DavidSerret/Pet-Shelter" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <p class="card-name">DeskUp</p>
+          <p class="card-stack">Laravel · PHP · MQTT · Tailwind</p>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/DavidSerret/DeskUp" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div>
+          <p class="card-name">HPO Analyzer</p>
+          <p class="card-stack">C# · Avalonia · .NET</p>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/DavidSerret/HPO/releases" target="_blank" rel="noopener noreferrer">Download ↓</a>
+          <a href="https://github.com/DavidSerret/HPO" target="_blank" rel="noopener noreferrer">Repo ↗</a>
+        </div>
+      </article>
 
     </div>
-  </main>
+  </section>
 
-  <!-- ── BLACK HOLE CANVAS ─────────────────────────────────── -->
-  <script>
-    (function () {
-      const canvas = document.getElementById('bh-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+  <hr>
 
-      let W, H, CX, CY;
+  <footer>
+    <p>Built by David Serret · 2026</p>
+    <p>davidserret.github.io</p>
+  </footer>
+</main>
 
-      function resize() {
-        W  = canvas.width  = canvas.offsetWidth  || window.innerWidth;
-        H  = canvas.height = canvas.offsetHeight || window.innerHeight;
-        CX = W / 2;
-        CY = H / 2;
-      }
+<script>
+(function () {
+  'use strict';
 
-      window.addEventListener('resize', resize, { passive: true });
-      resize();
+  const canvas  = document.getElementById('bh');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      /* Accretion disk parameters */
-      const RINGS      = 58;
-      const TILT       = 0.32;   /* perspective y-compression */
-      const ANIMATED   = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ── WebGL 2 context ───────────────────────────────────────────────
+  const gl = canvas.getContext('webgl2');
+  if (!gl) { console.warn('WebGL 2 not available'); return; }
 
-      function drawDisk(bhr, ts) {
-        const di   = bhr * 1.38;
-        const dout = bhr * 5.4;
+  // ── Vertex shader ─────────────────────────────────────────────────
+  const VS = `#version 300 es
+    in vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
+  `;
 
-        for (let i = 0; i < RINGS; i++) {
-          const t     = i / (RINGS - 1);           /* 0 = outer, 1 = inner */
-          const r     = dout - (dout - di) * t;
-          /* Keplerian: inner orbits faster */
-          const omega = (0.00012 + t * 0.00018) * (ANIMATED ? 1 : 0);
-          const phase = ts * omega;
-          /* Brightness and colour: outer dim cool teal → inner bright cyan */
-          const alpha = 0.055 + t * 0.28;
-          const g     = Math.round(162 + t * 50);
-          const b     = Math.round(158 + t * 33);
+  // ── Fragment shader: Schwarzschild ray-marching ───────────────────
+  const FS = `#version 300 es
+    precision highp float;
 
-          ctx.beginPath();
-          ctx.ellipse(0, 0, r, r * TILT, phase, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(45,${g},${b},${alpha})`;
-          ctx.lineWidth   = 1.7 - t * 0.5;
-          ctx.stroke();
+    uniform vec2  u_res;
+    uniform float u_time;
+    out vec4 fragColor;
+
+    // Physics — natural units G = c = 1
+    // Black hole mass M = 0.5, so Schwarzschild radius rs = 2M = 1.0
+    const float RS    = 1.0;
+    const float M     = 0.5;
+    const float R_IN  = 1.5;   // ISCO ≈ 3M (innermost stable circular orbit)
+    const float R_OUT = 6.5;   // outer disk edge
+    const float DT    = 0.10;  // base integration step
+
+    // Camera
+    const float CAM_D = 7.5;   // distance from BH
+    const float CAM_T = 0.21;  // tilt above disk plane (rad, ≈ 12°)
+    const float FOV   = 1.15;
+
+    // Palette — portfolio teal/cyan
+    const vec3 BG_COL  = vec3(0.024, 0.039, 0.051);
+    const vec3 C_INNER = vec3(0.55,  0.97,  0.93 );   // hot near-white cyan
+    const vec3 C_MID   = vec3(0.18,  0.83,  0.75 );   // accent teal #2dd4bf
+    const vec3 C_OUTER = vec3(0.05,  0.30,  0.38 );   // cool deep teal
+    const vec3 C_GLOW  = vec3(0.18,  0.83,  0.75 );   // photon-ring halo
+
+    // ── Noise ──────────────────────────────────────────────────────
+    float hash(float n)  { return fract(sin(n * 127.1) * 43758.5453); }
+    float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float snoise(float x) {
+      float i = floor(x), f = fract(x), u = f*f*(3.0-2.0*f);
+      return mix(hash(i), hash(i+1.0), u);
+    }
+
+    // ── Disk emission with relativistic Doppler beaming ────────────
+    vec3 diskColor(vec3 p, float rXZ, vec3 camPos) {
+      // 0 = inner edge, 1 = outer edge
+      float t = clamp((rXZ - R_IN) / (R_OUT - R_IN), 0.0, 1.0);
+
+      // Temperature: inner=hot cyan, outer=cool teal
+      vec3 col = t < 0.38
+        ? mix(C_INNER, C_MID,   t / 0.38)
+        : mix(C_MID,   C_OUTER, (t - 0.38) / 0.62);
+
+      // Radial luminosity (thin disk approximation)
+      float lum = pow(1.0 - 0.88 * t, 0.60) * 2.6;
+
+      // Keplerian orbital velocity magnitude
+      float v = sqrt(M / rXZ);
+
+      // Orbital tangent direction — CCW viewed from +y (prograde)
+      // At p=(r,0,0) → tangent=(0,0,-1) → gas moves toward camera → blueshifted
+      vec3 tangent = normalize(vec3(p.z, 0.0, -p.x));
+
+      // Relativistic Doppler factor D
+      float gamma = 1.0 / sqrt(max(1.0 - v * v, 0.01));
+      float beta  = v * dot(tangent, normalize(camPos - p));
+      float D     = clamp(1.0 / (gamma * (1.0 - beta)), 0.04, 12.0);
+
+      // Specific intensity scales as D³ for continuum radiation
+      float beam = D * D * D;
+
+      // Rotating disk texture (density clumps co-rotate with gas)
+      float omega = sqrt(M / (rXZ * rXZ * rXZ));
+      float phi   = atan(p.z, p.x) - u_time * omega * 0.55;
+      float tex   = 0.62 + 0.38 * snoise(phi * 2.4 + rXZ * 0.55);
+
+      // Opacity: full inside, fading at outer edge
+      float fade = 1.0 - smoothstep(0.5, 1.0, t) * 0.75;
+
+      return col * lum * beam * tex * fade;
+    }
+
+    // ── Procedural starfield ────────────────────────────────────────
+    float stars(vec3 d) {
+      vec2 ang = vec2(atan(d.z, d.x), asin(clamp(d.y, -1.0, 1.0)));
+      vec2 id  = floor(ang * 55.0);
+      vec2 f   = fract(ang * 55.0) - 0.5;
+      float r  = hash2(id);
+      float sz = 0.0025 + 0.005 * hash2(id + 7.31);
+      return smoothstep(sz, 0.0, length(f)) * step(0.963, r) * 0.5;
+    }
+
+    // ── Main ───────────────────────────────────────────────────────
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
+
+      // Camera setup
+      vec3 camPos  = vec3(0.0, sin(CAM_T) * CAM_D, -cos(CAM_T) * CAM_D);
+      vec3 forward = normalize(-camPos);
+      vec3 right   = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
+      vec3 up      = cross(right, forward);
+      vec3 dir     = normalize(forward * FOV + right * uv.x + up * uv.y);
+
+      // Ray state
+      vec3  pos     = camPos;
+      vec3  prevPos = camPos;
+      float prevY   = camPos.y;
+      float minR    = CAM_D;     // track closest approach (photon ring detection)
+
+      vec3 color   = BG_COL;
+      bool hitBH   = false;
+      bool hitDisk = false;
+
+      // ── Integrate photon geodesic (Schwarzschild metric) ───────
+      for (int i = 0; i < 180; i++) {
+        float r = length(pos);
+        minR = min(minR, r);
+
+        // Absorbed by event horizon
+        if (r < RS * 0.88) {
+          color = vec3(0.0);
+          hitBH = true;
+          break;
         }
+
+        // Disk crossing: y-sign change inside disk annulus
+        float rXZ = length(pos.xz);
+        if (rXZ > R_IN && rXZ < R_OUT && prevY * pos.y < 0.0) {
+          // Interpolate to the exact crossing plane
+          float a  = prevY / (prevY - pos.y);
+          vec3  hp = mix(prevPos, pos, clamp(a, 0.0, 1.0));
+          color    = diskColor(hp, length(hp.xz), camPos);
+          hitDisk  = true;
+          break;
+        }
+
+        // Early exit: ray escaped to far field
+        if (r > CAM_D * 2.5 && dot(dir, pos) > 0.0) break;
+
+        prevY   = pos.y;
+        prevPos = pos;
+
+        // Schwarzschild geodesic equation:
+        // d²pos/dλ² = -(3/2) RS |L|² r⁻⁵ pos
+        // where L = pos × dir is the conserved specific angular momentum
+        vec3  L   = cross(pos, dir);
+        float r5  = r * r * r * r * r;
+        vec3  acc = (-1.5 * RS * dot(L, L) / r5) * pos;
+
+        // Adaptive step: smaller near the black hole for accuracy
+        float dt = DT * (0.18 + 0.82 * smoothstep(RS, CAM_D * 0.4, r));
+
+        dir  = normalize(dir + acc * dt);
+        pos += dir * dt;
       }
 
-      function frame(ts) {
-        ctx.clearRect(0, 0, W, H);
-
-        const bhr = Math.min(W, H) * 0.085;
-
-        ctx.save();
-        ctx.translate(CX, CY);
-
-        /* Ambient nebula — drawn first, under everything */
-        const nebula = ctx.createRadialGradient(0, 0, bhr * 2.5, 0, 0, Math.min(W, H) * 0.7);
-        nebula.addColorStop(0, 'rgba(45,212,191,0.028)');
-        nebula.addColorStop(1, 'rgba(45,212,191,0)');
-        ctx.fillStyle = nebula;
-        ctx.fillRect(-CX, -CY, W, H);
-
-        /* Back half of disk (far side, behind the black hole) — upper canvas */
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(-W, -H, W * 2, H);   /* y < 0 in translated frame */
-        ctx.clip();
-        drawDisk(bhr, ts);
-        ctx.restore();
-
-        /* Black hole shadow — hard black core fading outward */
-        const shadow = ctx.createRadialGradient(0, 0, bhr * 0.42, 0, 0, bhr * 1.28);
-        shadow.addColorStop(0,    '#080c0f');
-        shadow.addColorStop(0.72, '#080c0f');
-        shadow.addColorStop(1,    'rgba(8,12,15,0)');
-        ctx.beginPath();
-        ctx.arc(0, 0, bhr * 1.28, 0, Math.PI * 2);
-        ctx.fillStyle = shadow;
-        ctx.fill();
-
-        /* Front half of disk (near side, in front of the black hole) — lower canvas */
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(-W, 0, W * 2, H);    /* y > 0 in translated frame */
-        ctx.clip();
-        drawDisk(bhr, ts);
-        ctx.restore();
-
-        /* Photon-ring glow — subtle halo at the event horizon */
-        const glow = ctx.createRadialGradient(0, 0, bhr * 0.72, 0, 0, bhr * 2.7);
-        glow.addColorStop(0,    'rgba(45,212,191,0)');
-        glow.addColorStop(0.32, 'rgba(45,212,191,0.075)');
-        glow.addColorStop(0.6,  'rgba(45,212,191,0.03)');
-        glow.addColorStop(1,    'rgba(45,212,191,0)');
-        ctx.beginPath();
-        ctx.arc(0, 0, bhr * 2.7, 0, Math.PI * 2);
-        ctx.fillStyle = glow;
-        ctx.fill();
-
-        ctx.restore();
-
-        if (ANIMATED) requestAnimationFrame(frame);
+      // Starfield for escaped rays
+      if (!hitBH && !hitDisk) {
+        color = BG_COL + stars(normalize(dir));
       }
 
-      if (ANIMATED) {
-        requestAnimationFrame(frame);
-      } else {
-        frame(0);   /* single static render for prefers-reduced-motion */
-      }
-    })();
-  </script>
+      // Photon-ring glow: rays that grazed r ≈ 1.5 RS
+      float prox = 1.0 - smoothstep(0.0, 1.5 * RS * 0.48, abs(minR - 1.5 * RS));
+      color += C_GLOW * pow(clamp(prox, 0.0, 1.0), 4.5) * 0.60;
 
+      // ACES tone mapping
+      vec3 x = max(color, vec3(0.0));
+      color = (x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14);
+
+      // sRGB gamma
+      color = pow(clamp(color, vec3(0.0), vec3(1.0)), vec3(1.0 / 2.2));
+
+      fragColor = vec4(color, 1.0);
+    }
+  `;
+
+  // ── Compile shader ────────────────────────────────────────────────
+  function mkShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error('Shader:', gl.getShaderInfoLog(s));
+      return null;
+    }
+    return s;
+  }
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER,   VS));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, FS));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    console.error('Link:', gl.getProgramInfoLog(prog));
+    return;
+  }
+  gl.useProgram(prog);
+
+  // ── Full-screen quad ──────────────────────────────────────────────
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER,
+    new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]),
+    gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  // ── Resize ────────────────────────────────────────────────────────
+  function resize() {
+    // Cap pixel ratio — the shader is expensive; 1.5× is a good balance
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width  = Math.round(canvas.offsetWidth  * dpr);
+    canvas.height = Math.round(canvas.offsetHeight * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  // ── Render loop ───────────────────────────────────────────────────
+  function render(ts) {
+    gl.uniform1f(uTime, ts * 0.001);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    if (!reduced) requestAnimationFrame(render);
+  }
+
+  if (reduced) {
+    render(0);
+  } else {
+    requestAnimationFrame(render);
+  }
+
+})();
+</script>
 </body>
 </html>
